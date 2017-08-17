@@ -1,0 +1,9 @@
+@import "board__item";
+
+.board {
+  @extend %flex;
+
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+}
