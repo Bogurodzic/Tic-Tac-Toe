@@ -1,0 +1,30 @@
+//Breakpoints
+$small: 576px;
+$medium: 768px;
+$large: 992px;
+$extralarge: 1200px;
+$slider: 1240px;
+
+@mixin small {
+  @media (min-width: $small) {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media (min-width: $medium) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media (min-width: $large) {
+    @content;
+  }
+}
+
+@mixin extralarge {
+  @media (min-width: $extralarge) {
+    @content;
+  }
+}
