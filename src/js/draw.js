@@ -1,3 +1,5 @@
+let message = require("./message");
+
 let nextFigure = "circle";
 
 function Circle(){
@@ -26,7 +28,8 @@ function handleClickEvent(){
   if(!hasFigure(this)){
     doTurn(this);
   } else if(hasFigure(this)){
-    console.log("coś już jest")
+    //console.log("coś już jest")
+    message.new("There is a figure already");
   }
 }
 

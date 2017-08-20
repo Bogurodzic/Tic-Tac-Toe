@@ -1,0 +1,11 @@
+.modal {
+  //opacity: 0;
+  width: 400px;
+  height: auto;
+  background: pink;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  //transition: opacity 1s ease-in-out;
+}

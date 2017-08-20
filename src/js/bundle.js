@@ -81,6 +81,8 @@ draw.initialize();
 "use strict";
 
 
+var message = __webpack_require__(2);
+
 var nextFigure = "circle";
 
 function Circle() {
@@ -109,7 +111,8 @@ function handleClickEvent() {
   if (!hasFigure(this)) {
     doTurn(this);
   } else if (hasFigure(this)) {
-    console.log("coś już jest");
+    //console.log("coś już jest")
+    message.new("There is a figure already");
   }
 }
 
@@ -149,6 +152,53 @@ var draw = {
 };
 
 module.exports = draw;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*let message = function(message){
+  let modal = document.createElement('div');
+  modal.className = "modal";
+  modal.innerHTML = message;
+  document.body.appendChild(modal);
+}*/
+
+var message = {
+  new: function _new(content) {
+    var message = this.create(content);
+    this.show(message);
+    this.addEvents(message);
+  },
+
+  create: function create(content) {
+    var modal = document.createElement('div');
+    modal.className = "modal";
+    modal.innerHTML = content;
+    return modal;
+  },
+
+  show: function show(message) {
+    document.body.appendChild(message);
+    //message.classList.add('modal--visible');
+  },
+
+  addEvents: function addEvents(message) {
+    this.removeMessage(message);
+  },
+
+  removeMessage: function removeMessage(message) {
+    setTimeout(function () {
+      message.remove();
+    }, 1000);
+  }
+
+};
+
+module.exports = message;
 
 /***/ })
 /******/ ]);

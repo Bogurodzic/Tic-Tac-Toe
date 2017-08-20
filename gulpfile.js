@@ -49,7 +49,7 @@ gulp.task("webpack", function(){
 
 gulp.task("watch", function(){
   gulp.watch("src/js/*", ["webpack"]);
-	gulp.watch(["src/scss/**/*.scss", "src/scss/blocks/**/*.scss"],  ["sass"]);
+	gulp.watch(["./src/scss/**/*.scss"],  ["sass"]);
   gulp.watch("src/scss/*.scss", ["sass"]);
 	gulp.watch("src/css/*.css", ["autoprefixer"]);
 	gulp.watch(["src/css/*.css", "src/index.html", "src/js/*.js", "src/scss/*"], browserSync.reload);
