@@ -1,3 +1,5 @@
+let nextFigure = "circle";
+
 function Circle(){
   let circle = document.createElement('div');
   circle.className = "circle";
@@ -10,20 +12,51 @@ function Square(){
   return square;
 }
 
-//let createCircle = document.createTextNode(circle);
-
 function getAllSpots(){
   return document.getElementsByClassName("board__item");
 }
 
 function addDrawEvents(){
   [].forEach.call(getAllSpots(), function(value, index){
-    value.addEventListener("click", drawElement)
+    value.addEventListener("click", handleClickEvent)
   })
 }
 
-function drawElement(){
-  this.appendChild(new Square());
+function handleClickEvent(){
+  if(!hasFigure(this)){
+    doTurn(this);
+  } else if(hasFigure(this)){
+    console.log("coś już jest")
+  }
+}
+
+function hasFigure(elem){
+  return elem.hasChildNodes();
+}
+
+function doTurn(place){
+  drawNewFigure(place);
+  changeNextFigure();
+}
+
+function drawNewFigure(place){
+  place.appendChild(checkNextFigure());
+}
+
+function checkNextFigure(){
+  if (nextFigure === "square"){
+    return new Square();
+  } else if (nextFigure === "circle"){
+    return new Circle();
+  }
+}
+
+function changeNextFigure(){
+  if (nextFigure === "square"){
+    nextFigure = "circle";
+  } else if (nextFigure === "circle"){
+    nextFigure = "square";
+  }
 }
 
 let draw = {
