@@ -83,6 +83,7 @@ draw.initialize();
 
 var message = __webpack_require__(2);
 
+var turnInformation = document.getElementsByClassName("information__turn")[0];
 var nextFigure = "circle";
 
 function Circle() {
@@ -123,6 +124,7 @@ function hasFigure(elem) {
 function doTurn(place) {
   drawNewFigure(place);
   changeNextFigure();
+  changeTurnInformation();
 }
 
 function drawNewFigure(place) {
@@ -145,9 +147,14 @@ function changeNextFigure() {
   }
 }
 
+function changeTurnInformation() {
+  turnInformation.innerText = nextFigure + " turn";
+}
+
 var draw = {
   initialize: function initialize() {
     addDrawEvents();
+    changeTurnInformation();
   }
 };
 

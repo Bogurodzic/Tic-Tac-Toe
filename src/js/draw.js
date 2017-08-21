@@ -1,5 +1,6 @@
 let message = require("./message");
 
+let turnInformation = document.getElementsByClassName("information__turn")[0];
 let nextFigure = "circle";
 
 function Circle(){
@@ -40,6 +41,7 @@ function hasFigure(elem){
 function doTurn(place){
   drawNewFigure(place);
   changeNextFigure();
+  changeTurnInformation();
 }
 
 function drawNewFigure(place){
@@ -62,9 +64,14 @@ function changeNextFigure(){
   }
 }
 
+function changeTurnInformation(){
+  turnInformation.innerText = nextFigure + " turn";
+}
+
 let draw = {
   initialize: function(){
     addDrawEvents();
+    changeTurnInformation();
   }
 }
 
