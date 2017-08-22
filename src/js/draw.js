@@ -1,4 +1,5 @@
 let message = require("./message");
+let ai = require("./ai");
 
 let turnInformation = document.getElementsByClassName("information__turn")[0];
 let nextFigure = "circle";
@@ -42,6 +43,7 @@ function doTurn(place){
   drawNewFigure(place);
   changeNextFigure();
   changeTurnInformation();
+  ai.makeTurn();
 }
 
 function drawNewFigure(place){

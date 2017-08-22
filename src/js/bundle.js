@@ -82,6 +82,7 @@ draw.initialize();
 
 
 var message = __webpack_require__(2);
+var ai = __webpack_require__(3);
 
 var turnInformation = document.getElementsByClassName("information__turn")[0];
 var nextFigure = "circle";
@@ -125,6 +126,7 @@ function doTurn(place) {
   drawNewFigure(place);
   changeNextFigure();
   changeTurnInformation();
+  ai.makeTurn();
 }
 
 function drawNewFigure(place) {
@@ -206,6 +208,46 @@ var message = {
 };
 
 module.exports = message;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var ai = {
+  that: undefined,
+  allPlaces: [],
+
+  makeTurn: function makeTurn() {
+    this.checkAllPlaces();
+  },
+
+  checkAllPlaces: function checkAllPlaces() {
+    var allPlaces = this.getAllPlaces();
+    //check every place
+    [].forEach.call(allPlaces, this.checkPlace);
+  },
+
+  getAllPlaces: function getAllPlaces() {
+    return document.getElementsByClassName("board__item");
+  },
+
+  checkPlace: function checkPlace(place, index) {
+    place.hasChildNodes() ? console.log(this) : console.log("ni ma");
+    /*if(place.hasChildNodes()){
+     } else if(!place.hasChildNodes()){
+      console.log("ni ma");
+    }*/
+  },
+
+  checkFigureType: function checkFigureType(figure) {
+    console.log(figure);
+  }
+};
+
+module.exports = ai;
 
 /***/ })
 /******/ ]);
