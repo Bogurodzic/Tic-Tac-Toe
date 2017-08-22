@@ -226,8 +226,9 @@ var ai = {
 
   checkAllPlaces: function checkAllPlaces() {
     var allPlaces = this.getAllPlaces();
-    //check every place
-    [].forEach.call(allPlaces, this.checkPlace);
+    for (var i = 0; i < allPlaces.length; i++) {
+      this.checkPlace(allPlaces[i]);
+    }
   },
 
   getAllPlaces: function getAllPlaces() {
@@ -235,15 +236,15 @@ var ai = {
   },
 
   checkPlace: function checkPlace(place, index) {
-    place.hasChildNodes() ? console.log(this) : console.log("ni ma");
+    place.hasChildNodes() ? this.checkFigureType(place) : console.log("nie ma");
     /*if(place.hasChildNodes()){
-     } else if(!place.hasChildNodes()){
+      } else if(!place.hasChildNodes()){
       console.log("ni ma");
     }*/
   },
 
   checkFigureType: function checkFigureType(figure) {
-    console.log(figure);
+    console.log(figure.childNodes[0].className);
   }
 };
 

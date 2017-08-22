@@ -8,8 +8,9 @@ let ai = {
 
   checkAllPlaces: function(){
     let allPlaces = this.getAllPlaces();
-    //check every place
-    [].forEach.call(allPlaces, this.checkPlace);
+    for(let i = 0; i < allPlaces.length; i++){
+      this.checkPlace(allPlaces[i]);
+    }
   },
 
   getAllPlaces: function(){
@@ -17,17 +18,14 @@ let ai = {
   },
 
   checkPlace: function(place, index){
-    place.hasChildNodes() ? console.log(this) : console.log("ni ma");
-    /*if(place.hasChildNodes()){
-
-    } else if(!place.hasChildNodes()){
-      console.log("ni ma");
-    }*/
+    place.hasChildNodes() ? this.checkFigureType(place) : console.log("nie ma");
   },
 
   checkFigureType: function(figure){
-    console.log(figure);
+    console.log(figure.childNodes[0].className);
   }
 }
+
+
 
 module.exports = ai;
