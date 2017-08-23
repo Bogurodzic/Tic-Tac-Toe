@@ -8,6 +8,10 @@ let logic = {
     this.checkIfWin(figure);
   },
 
+  hasFigure: function(spot){
+    return spot.hasChildNodes();
+  },
+
   clearAllSpots: function(){
     this.allSpots = [];
   },

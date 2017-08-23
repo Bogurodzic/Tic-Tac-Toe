@@ -60,11 +60,33 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var ui = {
+  nextFigure: "circle",
+  turnInformation: document.getElementsByClassName("information__turn")[0],
+
+  changeNextFigure: function changeNextFigure() {
+    this.nextFigure === "square" ? this.nextFigure = "circle" : this.nextFigure = "square";
+  },
+
+  changeTurnInformation: function changeTurnInformation() {
+    this.turnInformation.innerText = this.nextFigure + " turn";
+  }
+};
+
+module.exports = ui;
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -78,6 +100,10 @@ var logic = {
     this.clearAllSpots();
     this.checkAllSpots();
     this.checkIfWin(figure);
+  },
+
+  hasFigure: function hasFigure(spot) {
+    return spot.hasChildNodes();
   },
 
   clearAllSpots: function clearAllSpots() {
@@ -156,37 +182,20 @@ var logic = {
 module.exports = logic;
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var draw = __webpack_require__(2);
-
-draw.initialize();
-
-/***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var figure = __webpack_require__(3);
+var draw = __webpack_require__(3);
+var ui = __webpack_require__(0);
+var logic = __webpack_require__(1);
 var message = __webpack_require__(4);
-var logic = __webpack_require__(0);
 var computer = __webpack_require__(5);
 
-var turnInformation = document.getElementsByClassName("information__turn")[0];
-var nextFigure = "circle";
-
-var getAllSpots = function getAllSpots() {
-  return document.querySelectorAll(".board__item");
-};
-
 function addDrawEvents() {
-  getAllSpots().forEach(function (spot) {
+  logic.getAllSpots().forEach(function (spot) {
     return addHandleClickEvent(spot);
   });
 }
@@ -196,52 +205,26 @@ var addHandleClickEvent = function addHandleClickEvent(spot) {
 };
 
 function handleClickEvent() {
-  if (!hasFigure(this)) {
+  if (!logic.hasFigure(this)) {
     doTurn(this);
-  } else if (hasFigure(this)) {
+  } else if (logic.hasFigure(this)) {
     message.new("There is a figure already");
   }
 }
 
-var hasFigure = function hasFigure(elem) {
-  return elem.hasChildNodes();
-};
-
 function doTurn(place) {
-  drawNewFigure(place);
-  changeNextFigure();
-  changeTurnInformation();
-  checkWinCondition(nextFigure);
+  draw.drawNewFigure(place);
+  ui.changeNextFigure();
+  ui.changeTurnInformation();
+  checkWinCondition(ui.nextFigure);
 }
-
-var drawNewFigure = function drawNewFigure(place) {
-  return place.appendChild(checkNextFigure());
-};
-
-var checkNextFigure = function checkNextFigure() {
-  return nextFigure === "square" ? new figure.Square() : new figure.Circle();
-};
-
-var changeNextFigure = function changeNextFigure() {
-  return nextFigure === "square" ? nextFigure = "circle" : nextFigure = "square";
-};
-
-var changeTurnInformation = function changeTurnInformation() {
-  return turnInformation.innerText = nextFigure + " turn";
-};
 
 var checkWinCondition = function checkWinCondition(nextFigure) {
   return nextFigure === "circle" ? logic.check(2) : logic.check(1);
 };
 
-var draw = {
-  initialize: function initialize() {
-    addDrawEvents();
-    changeTurnInformation();
-  }
-};
-
-module.exports = draw;
+addDrawEvents();
+ui.changeTurnInformation();
 
 /***/ }),
 /* 3 */
@@ -249,6 +232,8 @@ module.exports = draw;
 
 "use strict";
 
+
+var ui = __webpack_require__(0);
 
 var figure = {
   Circle: function Circle() {
@@ -261,6 +246,14 @@ var figure = {
     var square = document.createElement('div');
     square.className = "square";
     return square;
+  },
+
+  drawNewFigure: function drawNewFigure(place) {
+    place.appendChild(this.checkNextFigure());
+  },
+
+  checkNextFigure: function checkNextFigure() {
+    return ui.nextFigure === "square" ? new this.Square() : new this.Circle();
   }
 };
 
@@ -312,7 +305,7 @@ module.exports = message;
 "use strict";
 
 
-var logic = __webpack_require__(0);
+var logic = __webpack_require__(1);
 
 var computer = {};
 
