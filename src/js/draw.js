@@ -1,20 +1,10 @@
+let figure = require("./figure");
 let message = require("./message");
 let logic = require("./logic");
+let computer = require("./computer");
 
 let turnInformation = document.getElementsByClassName("information__turn")[0];
 let nextFigure = "circle";
-
-function Circle(){
-  let circle = document.createElement('div');
-  circle.className = "circle";
-  return circle;
-}
-
-function Square(){
-  let square = document.createElement('div');
-  square.className = "square";
-  return square;
-}
 
 let getAllSpots = () => document.querySelectorAll(".board__item");
 
@@ -43,7 +33,7 @@ function doTurn(place){
 
 let drawNewFigure = place => place.appendChild(checkNextFigure());
 
-let checkNextFigure = () => nextFigure === "square" ? new Square() : new Circle();
+let checkNextFigure = () => nextFigure === "square" ? new figure.Square() : new figure.Circle();
 
 let changeNextFigure = () => nextFigure === "square" ? nextFigure = "circle" : nextFigure = "square";
 
