@@ -82,7 +82,7 @@ draw.initialize();
 
 
 var message = __webpack_require__(2);
-var ai = __webpack_require__(3);
+var logic = __webpack_require__(3);
 
 var turnInformation = document.getElementsByClassName("information__turn")[0];
 var nextFigure = "circle";
@@ -129,7 +129,7 @@ function doTurn(place) {
   drawNewFigure(place);
   changeNextFigure();
   changeTurnInformation();
-  ai.makeTurn();
+  checkWinCondition(nextFigure);
 }
 
 var drawNewFigure = function drawNewFigure(place) {
@@ -146,6 +146,10 @@ var changeNextFigure = function changeNextFigure() {
 
 var changeTurnInformation = function changeTurnInformation() {
   return turnInformation.innerText = nextFigure + " turn";
+};
+
+var checkWinCondition = function checkWinCondition(nextFigure) {
+  return nextFigure === "circle" ? logic.check(2) : logic.check(1);
 };
 
 var draw = {
@@ -203,36 +207,90 @@ module.exports = message;
 "use strict";
 
 
-var ai = {
-  that: undefined,
-  allPlaces: [],
+var logic = {
+  //0 = nothing, 1 = circle, 2 = square
+  allSpots: [],
 
-  makeTurn: function makeTurn() {
-    this.checkAllPlaces();
+  check: function check(figure) {
+    this.clearAllSpots();
+    this.checkAllSpots();
+    this.checkIfWin(figure);
   },
 
-  checkAllPlaces: function checkAllPlaces() {
+  clearAllSpots: function clearAllSpots() {
+    this.allSpots = [];
+  },
+
+  checkAllSpots: function checkAllSpots() {
     var _this = this;
 
-    this.getAllPlaces().forEach(function (place) {
+    this.getAllSpots().forEach(function (place) {
       return _this.checkPlace(place);
     });
   },
 
-  getAllPlaces: function getAllPlaces() {
+  getAllSpots: function getAllSpots() {
     return document.querySelectorAll(".board__item");
   },
 
-  checkPlace: function checkPlace(place, index) {
-    place.hasChildNodes() ? this.checkFigureType(place) : console.log("nie ma");
+  getFiguresFromAllSpots: function getFiguresFromAllSpots() {
+    return this.allSpots;
+  },
+
+  checkPlace: function checkPlace(place) {
+    return place.hasChildNodes() ? this.allSpots.push(this.checkFigureType(place)) : this.allSpots.push(0);
   },
 
   checkFigureType: function checkFigureType(figure) {
-    console.log(figure.childNodes[0].className);
+    return figure.childNodes[0].className === "circle" ? 1 : 2;
+  },
+
+  checkIfWin: function checkIfWin(figure) {
+    console.log("Sprawdzamy!");
+    this.checkRightAcross(figure);
+    this.checkLeftAcross(figure);
+    this.checkAllHorizontally(figure);
+    this.checkAllVertically(figure);
+  },
+
+  checkRightAcross: function checkRightAcross(figure) {
+    if (this.allSpots[0] === figure && this.allSpots[4] === figure && this.allSpots[8] === figure) {
+      console.log("win!");
+    }
+  },
+
+  checkLeftAcross: function checkLeftAcross(figure) {
+    if (this.allSpots[2] === figure && this.allSpots[4] === figure && this.allSpots[6] === figure) {
+      console.log("win!");
+    }
+  },
+
+  checkAllHorizontally: function checkAllHorizontally(figure) {
+    this.checkHorizontally(figure, 0);
+    this.checkHorizontally(figure, 1);
+    this.checkHorizontally(figure, 2);
+  },
+
+  checkAllVertically: function checkAllVertically(figure) {
+    this.checkVertically(figure, 0);
+    this.checkVertically(figure, 1);
+    this.checkVertically(figure, 2);
+  },
+
+  checkHorizontally: function checkHorizontally(figure, index) {
+    if (this.allSpots[0 + index * 3] === figure && this.allSpots[1 + index * 3] === figure && this.allSpots[2 + index * 3] === figure) {
+      console.log("win!");
+    }
+  },
+
+  checkVertically: function checkVertically(figure, index) {
+    if (this.allSpots[0 + index] === figure && this.allSpots[3 + index] === figure && this.allSpots[6 + index] === figure) {
+      console.log("win!");
+    }
   }
 };
 
-module.exports = ai;
+module.exports = logic;
 
 /***/ })
 /******/ ]);

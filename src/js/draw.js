@@ -1,5 +1,5 @@
 let message = require("./message");
-let ai = require("./ai");
+let logic = require("./logic");
 
 let turnInformation = document.getElementsByClassName("information__turn")[0];
 let nextFigure = "circle";
@@ -38,7 +38,7 @@ function doTurn(place){
   drawNewFigure(place);
   changeNextFigure();
   changeTurnInformation();
-  ai.makeTurn();
+  checkWinCondition(nextFigure);
 }
 
 let drawNewFigure = place => place.appendChild(checkNextFigure());
@@ -48,6 +48,8 @@ let checkNextFigure = () => nextFigure === "square" ? new Square() : new Circle(
 let changeNextFigure = () => nextFigure === "square" ? nextFigure = "circle" : nextFigure = "square";
 
 let changeTurnInformation = () => turnInformation.innerText = nextFigure + " turn";
+
+let checkWinCondition = (nextFigure) => nextFigure === "circle" ? logic.check(2) : logic.check(1);
 
 
 let draw = {
