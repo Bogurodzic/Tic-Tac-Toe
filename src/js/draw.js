@@ -16,28 +16,23 @@ function Square(){
   return square;
 }
 
-function getAllSpots(){
-  return document.getElementsByClassName("board__item");
-}
+let getAllSpots = () => document.querySelectorAll(".board__item");
 
 function addDrawEvents(){
-  [].forEach.call(getAllSpots(), function(value, index){
-    value.addEventListener("click", handleClickEvent)
-  })
+  getAllSpots().forEach(spot => addHandleClickEvent(spot));
 }
+
+let addHandleClickEvent = (spot) => spot.addEventListener("click", handleClickEvent);
 
 function handleClickEvent(){
   if(!hasFigure(this)){
     doTurn(this);
   } else if(hasFigure(this)){
-    //console.log("coś już jest")
     message.new("There is a figure already");
   }
 }
 
-function hasFigure(elem){
-  return elem.hasChildNodes();
-}
+let hasFigure = elem => elem.hasChildNodes();
 
 function doTurn(place){
   drawNewFigure(place);
@@ -46,29 +41,14 @@ function doTurn(place){
   ai.makeTurn();
 }
 
-function drawNewFigure(place){
-  place.appendChild(checkNextFigure());
-}
+let drawNewFigure = place => place.appendChild(checkNextFigure());
 
-function checkNextFigure(){
-  if (nextFigure === "square"){
-    return new Square();
-  } else if (nextFigure === "circle"){
-    return new Circle();
-  }
-}
+let checkNextFigure = () => nextFigure === "square" ? new Square() : new Circle();
 
-function changeNextFigure(){
-  if (nextFigure === "square"){
-    nextFigure = "circle";
-  } else if (nextFigure === "circle"){
-    nextFigure = "square";
-  }
-}
+let changeNextFigure = () => nextFigure === "square" ? nextFigure = "circle" : nextFigure = "square";
 
-function changeTurnInformation(){
-  turnInformation.innerText = nextFigure + " turn";
-}
+let changeTurnInformation = () => turnInformation.innerText = nextFigure + " turn";
+
 
 let draw = {
   initialize: function(){

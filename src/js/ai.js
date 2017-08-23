@@ -7,14 +7,11 @@ let ai = {
   },
 
   checkAllPlaces: function(){
-    let allPlaces = this.getAllPlaces();
-    for(let i = 0; i < allPlaces.length; i++){
-      this.checkPlace(allPlaces[i]);
-    }
+    this.getAllPlaces().forEach(place => this.checkPlace(place));
   },
 
   getAllPlaces: function(){
-    return document.getElementsByClassName("board__item");
+    return document.querySelectorAll(".board__item");
   },
 
   checkPlace: function(place, index){

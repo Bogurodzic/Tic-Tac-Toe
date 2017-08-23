@@ -99,28 +99,31 @@ function Square() {
   return square;
 }
 
-function getAllSpots() {
-  return document.getElementsByClassName("board__item");
-}
+var getAllSpots = function getAllSpots() {
+  return document.querySelectorAll(".board__item");
+};
 
 function addDrawEvents() {
-  [].forEach.call(getAllSpots(), function (value, index) {
-    value.addEventListener("click", handleClickEvent);
+  getAllSpots().forEach(function (spot) {
+    return addHandleClickEvent(spot);
   });
 }
+
+var addHandleClickEvent = function addHandleClickEvent(spot) {
+  return spot.addEventListener("click", handleClickEvent);
+};
 
 function handleClickEvent() {
   if (!hasFigure(this)) {
     doTurn(this);
   } else if (hasFigure(this)) {
-    //console.log("coś już jest")
     message.new("There is a figure already");
   }
 }
 
-function hasFigure(elem) {
+var hasFigure = function hasFigure(elem) {
   return elem.hasChildNodes();
-}
+};
 
 function doTurn(place) {
   drawNewFigure(place);
@@ -129,29 +132,21 @@ function doTurn(place) {
   ai.makeTurn();
 }
 
-function drawNewFigure(place) {
-  place.appendChild(checkNextFigure());
-}
+var drawNewFigure = function drawNewFigure(place) {
+  return place.appendChild(checkNextFigure());
+};
 
-function checkNextFigure() {
-  if (nextFigure === "square") {
-    return new Square();
-  } else if (nextFigure === "circle") {
-    return new Circle();
-  }
-}
+var checkNextFigure = function checkNextFigure() {
+  return nextFigure === "square" ? new Square() : new Circle();
+};
 
-function changeNextFigure() {
-  if (nextFigure === "square") {
-    nextFigure = "circle";
-  } else if (nextFigure === "circle") {
-    nextFigure = "square";
-  }
-}
+var changeNextFigure = function changeNextFigure() {
+  return nextFigure === "square" ? nextFigure = "circle" : nextFigure = "square";
+};
 
-function changeTurnInformation() {
-  turnInformation.innerText = nextFigure + " turn";
-}
+var changeTurnInformation = function changeTurnInformation() {
+  return turnInformation.innerText = nextFigure + " turn";
+};
 
 var draw = {
   initialize: function initialize() {
@@ -169,13 +164,6 @@ module.exports = draw;
 "use strict";
 
 
-/*let message = function(message){
-  let modal = document.createElement('div');
-  modal.className = "modal";
-  modal.innerHTML = message;
-  document.body.appendChild(modal);
-}*/
-
 var message = {
   new: function _new(content) {
     var message = this.create(content);
@@ -192,7 +180,6 @@ var message = {
 
   show: function show(message) {
     document.body.appendChild(message);
-    //message.classList.add('modal--visible');
   },
 
   addEvents: function addEvents(message) {
@@ -225,22 +212,19 @@ var ai = {
   },
 
   checkAllPlaces: function checkAllPlaces() {
-    var allPlaces = this.getAllPlaces();
-    for (var i = 0; i < allPlaces.length; i++) {
-      this.checkPlace(allPlaces[i]);
-    }
+    var _this = this;
+
+    this.getAllPlaces().forEach(function (place) {
+      return _this.checkPlace(place);
+    });
   },
 
   getAllPlaces: function getAllPlaces() {
-    return document.getElementsByClassName("board__item");
+    return document.querySelectorAll(".board__item");
   },
 
   checkPlace: function checkPlace(place, index) {
     place.hasChildNodes() ? this.checkFigureType(place) : console.log("nie ma");
-    /*if(place.hasChildNodes()){
-      } else if(!place.hasChildNodes()){
-      console.log("ni ma");
-    }*/
   },
 
   checkFigureType: function checkFigureType(figure) {
