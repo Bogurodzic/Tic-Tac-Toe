@@ -325,21 +325,58 @@ var ui = __webpack_require__(0);
 var draw = __webpack_require__(1);
 
 var computer = {
+  winPossibilities: [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]],
   computerFigure: ui.getComputerFigure(),
 
   doTurn: function doTurn() {
     this.checkPossibilities();
-    this.placeFigure();
     ui.changeNextFigure();
   },
 
   checkPossibilities: function checkPossibilities() {
     var allFiguresFromAllSpots = logic.getFiguresFromAllSpots();
     console.log(allFiguresFromAllSpots);
+
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = this.winPossibilities[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var winPossibilities = _step.value;
+
+        console.log("XD");
+        if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])) {
+          console.log(winPossibilities);
+          break;
+        }
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+
+    function checkSpot(index) {
+      if (allFiguresFromAllSpots[index] === 0 && allFiguresFromAllSpots[index] === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
 
-  placeFigure: function placeFigure() {
-    draw.drawNewFigure(logic.getPlaceByIndex(5));
+  placeFigure: function placeFigure(index) {
+    draw.drawNewFigure(logic.getPlaceByIndex(index));
   }
 
 };
