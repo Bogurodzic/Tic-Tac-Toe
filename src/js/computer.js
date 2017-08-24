@@ -14,19 +14,29 @@ let computer = {
 
   checkPossibilities: function(){
     let allFiguresFromAllSpots = logic.getFiguresFromAllSpots();
+    let that = this;
 
     for (let winPossibilities of this.winPossibilities) {
       if(checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])){
-        console.log(winPossibilities);
+        placeFigureInFreeSpot(winPossibilities);
         break;
       }
     }
 
     function checkSpot(index){
-      if(allFiguresFromAllSpots[index] === 0 && allFiguresFromAllSpots[index] === 0){
+      if(allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === 2){
         return true;
       } else {
         return false;
+      }
+    }
+
+    function placeFigureInFreeSpot(spots){
+      for (let spot of spots) {
+        if(allFiguresFromAllSpots[spot] === 0){
+          that.placeFigure(spot);
+          break;
+        }
       }
     }
 

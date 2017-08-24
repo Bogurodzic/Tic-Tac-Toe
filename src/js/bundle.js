@@ -335,7 +335,7 @@ var computer = {
 
   checkPossibilities: function checkPossibilities() {
     var allFiguresFromAllSpots = logic.getFiguresFromAllSpots();
-    console.log(allFiguresFromAllSpots);
+    var that = this;
 
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
@@ -345,9 +345,8 @@ var computer = {
       for (var _iterator = this.winPossibilities[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var winPossibilities = _step.value;
 
-        console.log("XD");
         if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])) {
-          console.log(winPossibilities);
+          placeFigureInFreeSpot(winPossibilities);
           break;
         }
       }
@@ -367,10 +366,40 @@ var computer = {
     }
 
     function checkSpot(index) {
-      if (allFiguresFromAllSpots[index] === 0 && allFiguresFromAllSpots[index] === 0) {
+      if (allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === 2) {
         return true;
       } else {
         return false;
+      }
+    }
+
+    function placeFigureInFreeSpot(spots) {
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
+      try {
+        for (var _iterator2 = spots[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var spot = _step2.value;
+
+          if (allFiguresFromAllSpots[spot] === 0) {
+            that.placeFigure(spot);
+            break;
+          }
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+            _iterator2.return();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
     }
   },
