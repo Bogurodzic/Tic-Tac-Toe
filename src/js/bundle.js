@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,6 +73,16 @@
 var ui = {
   nextFigure: "circle",
   turnInformation: document.getElementsByClassName("information__turn")[0],
+  computerFigure: "square",
+  playerFigure: "circle",
+
+  getPlayerFigure: function getPlayerFigure() {
+    return this.playerFigure;
+  },
+
+  getComputerFigure: function getComputerFigure() {
+    return this.computerFigure;
+  },
 
   changeNextFigure: function changeNextFigure() {
     this.nextFigure === "square" ? this.nextFigure = "circle" : this.nextFigure = "square";
@@ -87,6 +97,39 @@ module.exports = ui;
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var ui = __webpack_require__(0);
+
+var figure = {
+  Circle: function Circle() {
+    var circle = document.createElement('div');
+    circle.className = "circle";
+    return circle;
+  },
+
+  Square: function Square() {
+    var square = document.createElement('div');
+    square.className = "square";
+    return square;
+  },
+
+  drawNewFigure: function drawNewFigure(place) {
+    place.appendChild(this.checkNextFigure());
+  },
+
+  checkNextFigure: function checkNextFigure() {
+    return ui.nextFigure === "square" ? new this.Square() : new this.Circle();
+  }
+};
+
+module.exports = figure;
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -120,6 +163,10 @@ var logic = {
 
   getAllSpots: function getAllSpots() {
     return document.querySelectorAll(".board__item");
+  },
+
+  getPlaceByIndex: function getPlaceByIndex(index) {
+    return this.getAllSpots()[index];
   },
 
   getFiguresFromAllSpots: function getFiguresFromAllSpots() {
@@ -182,15 +229,15 @@ var logic = {
 module.exports = logic;
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var draw = __webpack_require__(3);
+var draw = __webpack_require__(1);
 var ui = __webpack_require__(0);
-var logic = __webpack_require__(1);
+var logic = __webpack_require__(2);
 var message = __webpack_require__(4);
 var computer = __webpack_require__(5);
 
@@ -217,6 +264,7 @@ function doTurn(place) {
   ui.changeNextFigure();
   ui.changeTurnInformation();
   checkWinCondition(ui.nextFigure);
+  computer.doTurn();
 }
 
 var checkWinCondition = function checkWinCondition(nextFigure) {
@@ -225,39 +273,6 @@ var checkWinCondition = function checkWinCondition(nextFigure) {
 
 addDrawEvents();
 ui.changeTurnInformation();
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var ui = __webpack_require__(0);
-
-var figure = {
-  Circle: function Circle() {
-    var circle = document.createElement('div');
-    circle.className = "circle";
-    return circle;
-  },
-
-  Square: function Square() {
-    var square = document.createElement('div');
-    square.className = "square";
-    return square;
-  },
-
-  drawNewFigure: function drawNewFigure(place) {
-    place.appendChild(this.checkNextFigure());
-  },
-
-  checkNextFigure: function checkNextFigure() {
-    return ui.nextFigure === "square" ? new this.Square() : new this.Circle();
-  }
-};
-
-module.exports = figure;
 
 /***/ }),
 /* 4 */
@@ -305,9 +320,29 @@ module.exports = message;
 "use strict";
 
 
-var logic = __webpack_require__(1);
+var logic = __webpack_require__(2);
+var ui = __webpack_require__(0);
+var draw = __webpack_require__(1);
 
-var computer = {};
+var computer = {
+  computerFigure: ui.getComputerFigure(),
+
+  doTurn: function doTurn() {
+    this.checkPossibilities();
+    this.placeFigure();
+    ui.changeNextFigure();
+  },
+
+  checkPossibilities: function checkPossibilities() {
+    var allFiguresFromAllSpots = logic.getFiguresFromAllSpots();
+    console.log(allFiguresFromAllSpots);
+  },
+
+  placeFigure: function placeFigure() {
+    draw.drawNewFigure(logic.getPlaceByIndex(5));
+  }
+
+};
 
 module.exports = computer;
 

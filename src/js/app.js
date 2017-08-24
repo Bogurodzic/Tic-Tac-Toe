@@ -24,6 +24,7 @@ function doTurn(place){
   ui.changeNextFigure();
   ui.changeTurnInformation();
   checkWinCondition(ui.nextFigure);
+  computer.doTurn();
 }
 
 let checkWinCondition = (nextFigure) => nextFigure === "circle" ? logic.check(2) : logic.check(1);

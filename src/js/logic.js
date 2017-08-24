@@ -24,6 +24,10 @@ let logic = {
     return document.querySelectorAll(".board__item");
   },
 
+  getPlaceByIndex: function(index){
+    return this.getAllSpots()[index]
+  },
+
   getFiguresFromAllSpots: function(){
     return this.allSpots;
   },
