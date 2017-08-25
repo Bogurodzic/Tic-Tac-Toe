@@ -1,0 +1,13 @@
+.reset {
+  width: 150px;
+  height: 30px;
+  margin: 0 auto;
+  margin-top: 30px;
+  border: 1px dashed black;
+
+  @extend %flexcenter;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
