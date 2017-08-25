@@ -102,6 +102,27 @@ module.exports = ui;
 "use strict";
 
 
+var block = {
+  isBlocked: false,
+
+  blockGame: function blockGame() {
+    this.isBlocked = true;
+  },
+
+  unblockGame: function unblockGame() {
+    this.isBlocked = false;
+  }
+};
+
+module.exports = block;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var ui = __webpack_require__(0);
 
 var figure = {
@@ -129,13 +150,14 @@ var figure = {
 module.exports = figure;
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var win = __webpack_require__(5);
+var block = __webpack_require__(1);
 
 var logic = {
   //0 = nothing, 1 = circle, 2 = square
@@ -234,6 +256,7 @@ var logic = {
   resetAll: function resetAll() {
     this.clearAllSpots();
     this.clearBoard();
+    block.unblockGame();
   },
 
   clearBoard: function clearBoard() {
@@ -252,48 +275,33 @@ var logic = {
 module.exports = logic;
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var block = {
-  isBlocked: false,
-
-  blockGame: function blockGame() {
-    this.isBlocked = true;
-  },
-
-  unblockGame: function unblockGame() {
-    this.isBlocked = false;
-  }
-};
-
-module.exports = block;
-
-/***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var draw = __webpack_require__(1);
+var draw = __webpack_require__(2);
 var ui = __webpack_require__(0);
-var logic = __webpack_require__(2);
+var logic = __webpack_require__(3);
 var message = __webpack_require__(6);
 var computer = __webpack_require__(7);
-var block = __webpack_require__(3);
+var block = __webpack_require__(1);
 
-function addDrawEvents() {
+function addEvents() {
   logic.getAllSpots().forEach(function (spot) {
     return addHandleClickEvent(spot);
   });
+  addResetEvent();
 }
 
 var addHandleClickEvent = function addHandleClickEvent(spot) {
   return spot.addEventListener("click", handleClickEvent);
+};
+var addResetEvent = function addResetEvent() {
+  document.getElementById("reset").addEventListener("click", function () {
+    return logic.resetAll();
+  });
 };
 
 function handleClickEvent() {
@@ -311,8 +319,6 @@ function doTurn(place) {
     ui.changeTurnInformation();
     checkWinCondition(ui.nextFigure);
     computer.doTurn();
-  } else if (block.isBlocked) {
-    logic.resetAll();
   }
 }
 
@@ -320,7 +326,7 @@ var checkWinCondition = function checkWinCondition(nextFigure) {
   return nextFigure === "circle" ? logic.check(2) : logic.check(1);
 };
 
-addDrawEvents();
+addEvents();
 ui.changeTurnInformation();
 
 /***/ }),
@@ -330,7 +336,7 @@ ui.changeTurnInformation();
 "use strict";
 
 
-var block = __webpack_require__(3);
+var block = __webpack_require__(1);
 
 var win = {
   init: function init(figure) {
@@ -391,9 +397,9 @@ module.exports = message;
 "use strict";
 
 
-var logic = __webpack_require__(2);
+var logic = __webpack_require__(3);
 var ui = __webpack_require__(0);
-var draw = __webpack_require__(1);
+var draw = __webpack_require__(2);
 
 var computer = {
   winPossibilities: [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]],

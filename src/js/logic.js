@@ -1,4 +1,5 @@
 let win = require("./win");
+let block = require("./block");
 
 let logic = {
   //0 = nothing, 1 = circle, 2 = square
@@ -93,6 +94,7 @@ let logic = {
   resetAll: function(){
     this.clearAllSpots();
     this.clearBoard();
+    block.unblockGame();
   },
 
   clearBoard: function(){

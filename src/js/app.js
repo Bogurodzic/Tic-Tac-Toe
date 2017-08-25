@@ -6,11 +6,15 @@ let computer = require("./computer");
 let block = require("./block");
 
 
-function addDrawEvents(){
+function addEvents(){
   logic.getAllSpots().forEach(spot => addHandleClickEvent(spot));
+  addResetEvent();
 }
 
 let addHandleClickEvent = (spot) => spot.addEventListener("click", handleClickEvent);
+let addResetEvent = () => {
+  document.getElementById("reset").addEventListener("click", () => logic.resetAll());
+}
 
 function handleClickEvent(){
   if(!logic.hasFigure(this)){
@@ -27,12 +31,10 @@ function doTurn(place){
     ui.changeTurnInformation();
     checkWinCondition(ui.nextFigure);
     computer.doTurn();
-  } else if (block.isBlocked) {
-    logic.resetAll();
   }
 }
 
 let checkWinCondition = (nextFigure) => nextFigure === "circle" ? logic.check(2) : logic.check(1);
 
-addDrawEvents();
+addEvents();
 ui.changeTurnInformation();
