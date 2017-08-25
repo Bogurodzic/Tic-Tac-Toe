@@ -423,8 +423,28 @@ module.exports = computer;
 var vsComputer = __webpack_require__(7);
 var vsHuman = __webpack_require__(9);
 
-//vsComputer.start();
-vsHuman.start();
+var getGameStart = function getGameStart() {
+  return document.getElementById('game-start');
+};
+var hideGameStart = function hideGameStart(gameStart) {
+  return gameStart.style.display = "none";
+};
+var getHumanButton = function getHumanButton() {
+  return document.getElementById('human');
+};
+var getComputerButton = function getComputerButton() {
+  return document.getElementById('computer');
+};
+
+getHumanButton().addEventListener("click", function () {
+  return vsHuman.start();
+});
+getComputerButton().addEventListener("click", function () {
+  return vsComputer.start();
+});
+getGameStart().addEventListener("click", function () {
+  return hideGameStart(getGameStart());
+});
 
 /***/ }),
 /* 7 */
