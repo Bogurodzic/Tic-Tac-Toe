@@ -17,7 +17,20 @@ let ui = {
   },
 
   changeTurnInformation: function(){
-    this.turnInformation.innerText = this.nextFigure + " turn";
+    this.turnInformation.innerText = this.capitalize(this.nextFigure) + " Turn";
+    this.turnInformation.classList.toggle("information__turn--other-color");
+  },
+
+  hideTurnInformation: function(){
+    this.turnInformation.style.display = "none";
+  },
+
+  showTurnInformation: function(){
+    this.turnInformation.style.display = "block";
+  },
+
+  capitalize: function(text){
+    return text.charAt(0).toUpperCase() + text.slice(1);
   }
 }
 

@@ -1,9 +1,11 @@
 let block = require("./block");
+let ui = require("./ui");
 
 let win = {
   init: function(figure){
     this.showFigure(figure);
     this.showInfo();
+    ui.hideTurnInformation();
     block.blockGame();
   },
 

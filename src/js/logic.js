@@ -1,5 +1,6 @@
 let win = require("./win");
 let block = require("./block");
+let ui = require("./ui");
 
 let logic = {
   //0 = nothing, 1 = circle, 2 = square
@@ -95,6 +96,7 @@ let logic = {
     this.clearAllSpots();
     this.clearBoard();
     block.unblockGame();
+    ui.showTurnInformation();
   },
 
   clearBoard: function(){

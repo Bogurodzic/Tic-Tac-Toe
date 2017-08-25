@@ -159,8 +159,17 @@ body {
   font-size: 16px;
   text-align: center; }
 
+.information {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
 .information__turn {
-  text-align: center; }
+  text-align: center;
+  font-size: 20px;
+  color: #D77400; }
+
+.information__turn--other-color {
+  color: #7DBEA7; }
 
 .win-info {
   display: none;

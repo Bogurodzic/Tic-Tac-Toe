@@ -89,7 +89,20 @@ var ui = {
   },
 
   changeTurnInformation: function changeTurnInformation() {
-    this.turnInformation.innerText = this.nextFigure + " turn";
+    this.turnInformation.innerText = this.capitalize(this.nextFigure) + " Turn";
+    this.turnInformation.classList.toggle("information__turn--other-color");
+  },
+
+  hideTurnInformation: function hideTurnInformation() {
+    this.turnInformation.style.display = "none";
+  },
+
+  showTurnInformation: function showTurnInformation() {
+    this.turnInformation.style.display = "block";
+  },
+
+  capitalize: function capitalize(text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
   }
 };
 
@@ -158,6 +171,7 @@ module.exports = figure;
 
 var win = __webpack_require__(8);
 var block = __webpack_require__(1);
+var ui = __webpack_require__(0);
 
 var logic = {
   //0 = nothing, 1 = circle, 2 = square
@@ -257,6 +271,7 @@ var logic = {
     this.clearAllSpots();
     this.clearBoard();
     block.unblockGame();
+    ui.showTurnInformation();
   },
 
   clearBoard: function clearBoard() {
@@ -515,11 +530,13 @@ module.exports = vsComputer;
 
 
 var block = __webpack_require__(1);
+var ui = __webpack_require__(0);
 
 var win = {
   init: function init(figure) {
     this.showFigure(figure);
     this.showInfo();
+    ui.hideTurnInformation();
     block.blockGame();
   },
 

@@ -1,6 +1,8 @@
 .information {
-
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 @import "information__mode";
 @import "information__turn";
+@import "information__turn--other-color";
