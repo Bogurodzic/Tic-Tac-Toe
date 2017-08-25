@@ -156,7 +156,7 @@ module.exports = figure;
 "use strict";
 
 
-var win = __webpack_require__(5);
+var win = __webpack_require__(6);
 var block = __webpack_require__(1);
 
 var logic = {
@@ -281,11 +281,22 @@ module.exports = logic;
 "use strict";
 
 
+var vsComputer = __webpack_require__(5);
+
+vsComputer.start();
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var draw = __webpack_require__(2);
 var ui = __webpack_require__(0);
 var logic = __webpack_require__(3);
-var message = __webpack_require__(6);
-var computer = __webpack_require__(7);
+var message = __webpack_require__(7);
+var computer = __webpack_require__(8);
 var block = __webpack_require__(1);
 
 function addEvents() {
@@ -326,11 +337,17 @@ var checkWinCondition = function checkWinCondition(nextFigure) {
   return nextFigure === "circle" ? logic.check(2) : logic.check(1);
 };
 
-addEvents();
-ui.changeTurnInformation();
+var vsComputer = {
+  start: function start() {
+    addEvents();
+    ui.changeTurnInformation();
+  }
+};
+
+module.exports = vsComputer;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -352,7 +369,7 @@ var win = {
 module.exports = win;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -391,7 +408,7 @@ var message = {
 module.exports = message;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
