@@ -1,3 +1,5 @@
 let vsComputer = require("./vsComputer");
+let vsHuman = require("./vsHuman");
 
-vsComputer.start();
+//vsComputer.start();
+vsHuman.start();

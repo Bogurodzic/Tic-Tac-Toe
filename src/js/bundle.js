@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -156,7 +156,7 @@ module.exports = figure;
 "use strict";
 
 
-var win = __webpack_require__(6);
+var win = __webpack_require__(8);
 var block = __webpack_require__(1);
 
 var logic = {
@@ -281,100 +281,6 @@ module.exports = logic;
 "use strict";
 
 
-var vsComputer = __webpack_require__(5);
-
-vsComputer.start();
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var draw = __webpack_require__(2);
-var ui = __webpack_require__(0);
-var logic = __webpack_require__(3);
-var message = __webpack_require__(7);
-var computer = __webpack_require__(8);
-var block = __webpack_require__(1);
-
-function addEvents() {
-  logic.getAllSpots().forEach(function (spot) {
-    return addHandleClickEvent(spot);
-  });
-  addResetEvent();
-}
-
-var addHandleClickEvent = function addHandleClickEvent(spot) {
-  return spot.addEventListener("click", handleClickEvent);
-};
-var addResetEvent = function addResetEvent() {
-  document.getElementById("reset").addEventListener("click", function () {
-    return logic.resetAll();
-  });
-};
-
-function handleClickEvent() {
-  if (!logic.hasFigure(this)) {
-    doTurn(this);
-  } else if (logic.hasFigure(this)) {
-    message.new("There is a figure already");
-  }
-}
-
-function doTurn(place) {
-  if (!block.isBlocked) {
-    draw.drawNewFigure(place);
-    ui.changeNextFigure();
-    ui.changeTurnInformation();
-    checkWinCondition(ui.nextFigure);
-    computer.doTurn();
-  }
-}
-
-var checkWinCondition = function checkWinCondition(nextFigure) {
-  return nextFigure === "circle" ? logic.check(2) : logic.check(1);
-};
-
-var vsComputer = {
-  start: function start() {
-    addEvents();
-    ui.changeTurnInformation();
-  }
-};
-
-module.exports = vsComputer;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var block = __webpack_require__(1);
-
-var win = {
-  init: function init(figure) {
-    this.showFigure(figure);
-    block.blockGame();
-  },
-
-  showFigure: function showFigure(figure) {
-    document.getElementById("win-info-figure").innerHTML = figure === 1 ? "circle" : "square";
-  }
-};
-
-module.exports = win;
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 var message = {
   new: function _new(content) {
     var message = this.create(content);
@@ -408,7 +314,7 @@ var message = {
 module.exports = message;
 
 /***/ }),
-/* 8 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -506,6 +412,162 @@ var computer = {
 };
 
 module.exports = computer;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var vsComputer = __webpack_require__(7);
+var vsHuman = __webpack_require__(9);
+
+//vsComputer.start();
+vsHuman.start();
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var draw = __webpack_require__(2);
+var ui = __webpack_require__(0);
+var logic = __webpack_require__(3);
+var message = __webpack_require__(4);
+var computer = __webpack_require__(5);
+var block = __webpack_require__(1);
+
+function addEvents() {
+  logic.getAllSpots().forEach(function (spot) {
+    return addHandleClickEvent(spot);
+  });
+  addResetEvent();
+}
+
+var addHandleClickEvent = function addHandleClickEvent(spot) {
+  return spot.addEventListener("click", handleClickEvent);
+};
+var addResetEvent = function addResetEvent() {
+  document.getElementById("reset").addEventListener("click", function () {
+    return logic.resetAll();
+  });
+};
+
+function handleClickEvent() {
+  if (!logic.hasFigure(this)) {
+    doTurn(this);
+  } else if (logic.hasFigure(this)) {
+    message.new("There is a figure already");
+  }
+}
+
+function doTurn(place) {
+  if (!block.isBlocked) {
+    draw.drawNewFigure(place);
+    ui.changeNextFigure();
+    ui.changeTurnInformation();
+    checkWinCondition(ui.nextFigure);
+    computer.doTurn();
+  }
+}
+
+var checkWinCondition = function checkWinCondition(nextFigure) {
+  return nextFigure === "circle" ? logic.check(2) : logic.check(1);
+};
+
+var vsComputer = {
+  start: function start() {
+    addEvents();
+    ui.changeTurnInformation();
+  }
+};
+
+module.exports = vsComputer;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var block = __webpack_require__(1);
+
+var win = {
+  init: function init(figure) {
+    this.showFigure(figure);
+    block.blockGame();
+  },
+
+  showFigure: function showFigure(figure) {
+    document.getElementById("win-info-figure").innerHTML = figure === 1 ? "circle" : "square";
+  }
+};
+
+module.exports = win;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var draw = __webpack_require__(2);
+var ui = __webpack_require__(0);
+var logic = __webpack_require__(3);
+var message = __webpack_require__(4);
+var computer = __webpack_require__(5);
+var block = __webpack_require__(1);
+
+function addEvents() {
+  logic.getAllSpots().forEach(function (spot) {
+    return addHandleClickEvent(spot);
+  });
+  addResetEvent();
+}
+
+var addHandleClickEvent = function addHandleClickEvent(spot) {
+  return spot.addEventListener("click", handleClickEvent);
+};
+var addResetEvent = function addResetEvent() {
+  document.getElementById("reset").addEventListener("click", function () {
+    return logic.resetAll();
+  });
+};
+
+function handleClickEvent() {
+  if (!logic.hasFigure(this)) {
+    doTurn(this);
+  } else if (logic.hasFigure(this)) {
+    message.new("There is a figure already");
+  }
+}
+
+function doTurn(place) {
+  if (!block.isBlocked) {
+    draw.drawNewFigure(place);
+    ui.changeNextFigure();
+    ui.changeTurnInformation();
+    checkWinCondition(ui.nextFigure);
+  }
+}
+
+var checkWinCondition = function checkWinCondition(nextFigure) {
+  return nextFigure === "circle" ? logic.check(2) : logic.check(1);
+};
+
+var vsHuman = {
+  start: function start() {
+    addEvents();
+    ui.changeTurnInformation();
+  }
+};
+
+module.exports = vsHuman;
 
 /***/ })
 /******/ ]);
