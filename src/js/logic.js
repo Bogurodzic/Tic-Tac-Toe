@@ -89,6 +89,19 @@ let logic = {
       win.init(figure);
     }
   },
+
+  resetAll: function(){
+    this.clearAllSpots();
+    this.clearBoard();
+  },
+
+  clearBoard: function(){
+    this.getAllSpots().forEach(spot => this.clearSpot(spot));
+  },
+
+  clearSpot: function(spot){
+    this.hasFigure(spot) ? spot.removeChild(spot.childNodes[0]) : false ;
+  }
 }
 
 module.exports = logic;

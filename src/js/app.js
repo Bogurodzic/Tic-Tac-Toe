@@ -27,6 +27,8 @@ function doTurn(place){
     ui.changeTurnInformation();
     checkWinCondition(ui.nextFigure);
     computer.doTurn();
+  } else if (block.isBlocked) {
+    logic.resetAll();
   }
 }
 

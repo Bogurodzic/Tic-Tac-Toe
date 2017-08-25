@@ -229,6 +229,23 @@ var logic = {
       console.log(figure + "win!");
       win.init(figure);
     }
+  },
+
+  resetAll: function resetAll() {
+    this.clearAllSpots();
+    this.clearBoard();
+  },
+
+  clearBoard: function clearBoard() {
+    var _this2 = this;
+
+    this.getAllSpots().forEach(function (spot) {
+      return _this2.clearSpot(spot);
+    });
+  },
+
+  clearSpot: function clearSpot(spot) {
+    this.hasFigure(spot) ? spot.removeChild(spot.childNodes[0]) : false;
   }
 };
 
@@ -294,6 +311,8 @@ function doTurn(place) {
     ui.changeTurnInformation();
     checkWinCondition(ui.nextFigure);
     computer.doTurn();
+  } else if (block.isBlocked) {
+    logic.resetAll();
   }
 }
 
