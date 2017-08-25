@@ -349,6 +349,7 @@ var computer = {
     if (!block.isBlocked) {
       this.checkPossibilities();
       ui.changeNextFigure();
+      ui.changeTurnInformation();
       logic.check(2);
     }
   },
