@@ -191,13 +191,13 @@ var logic = {
 
   checkRightAcross: function checkRightAcross(figure) {
     if (this.allSpots[0] === figure && this.allSpots[4] === figure && this.allSpots[8] === figure) {
-      console.log("win!");
+      console.log(figure + "win!");
     }
   },
 
   checkLeftAcross: function checkLeftAcross(figure) {
     if (this.allSpots[2] === figure && this.allSpots[4] === figure && this.allSpots[6] === figure) {
-      console.log("win!");
+      console.log(figure + "win!");
     }
   },
 
@@ -215,13 +215,13 @@ var logic = {
 
   checkHorizontally: function checkHorizontally(figure, index) {
     if (this.allSpots[0 + index * 3] === figure && this.allSpots[1 + index * 3] === figure && this.allSpots[2 + index * 3] === figure) {
-      console.log("win!");
+      console.log(figure + "win!");
     }
   },
 
   checkVertically: function checkVertically(figure, index) {
     if (this.allSpots[0 + index] === figure && this.allSpots[3 + index] === figure && this.allSpots[6 + index] === figure) {
-      console.log("win!");
+      console.log(figure + "win!");
     }
   }
 };
@@ -331,6 +331,7 @@ var computer = {
   doTurn: function doTurn() {
     this.checkPossibilities();
     ui.changeNextFigure();
+    logic.check(2);
   },
 
   checkPossibilities: function checkPossibilities() {

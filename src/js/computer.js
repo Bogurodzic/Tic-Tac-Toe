@@ -10,6 +10,7 @@ let computer = {
   doTurn: function(){
     this.checkPossibilities();
     ui.changeNextFigure();
+    logic.check(2);
   },
 
   checkPossibilities: function(){
