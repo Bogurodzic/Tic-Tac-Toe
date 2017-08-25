@@ -15,6 +15,10 @@ let win = {
 
   showInfo: function(){
     document.getElementById('win-info').classList.add("win-info--visible");
+  },
+
+  hideInfo: function(){
+    document.getElementById('win-info').classList.remove("win-info--visible");
   }
 }
 

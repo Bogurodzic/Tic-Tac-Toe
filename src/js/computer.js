@@ -1,6 +1,7 @@
 let logic = require("./logic");
 let ui = require("./ui");
 let draw = require("./draw");
+let block = require("./block");
 
 
 let computer = {
@@ -8,9 +9,11 @@ let computer = {
   computerFigure : ui.getComputerFigure(),
 
   doTurn: function(){
-    this.checkPossibilities();
-    ui.changeNextFigure();
-    logic.check(2);
+    if(!block.isBlocked){
+      this.checkPossibilities();
+      ui.changeNextFigure();
+      logic.check(2);
+    }
   },
 
   checkPossibilities: function(){

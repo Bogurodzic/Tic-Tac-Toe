@@ -272,6 +272,7 @@ var logic = {
     this.clearBoard();
     block.unblockGame();
     ui.showTurnInformation();
+    win.hideInfo();
   },
 
   clearBoard: function clearBoard() {
@@ -338,15 +339,18 @@ module.exports = message;
 var logic = __webpack_require__(3);
 var ui = __webpack_require__(0);
 var draw = __webpack_require__(2);
+var block = __webpack_require__(1);
 
 var computer = {
   winPossibilities: [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]],
   computerFigure: ui.getComputerFigure(),
 
   doTurn: function doTurn() {
-    this.checkPossibilities();
-    ui.changeNextFigure();
-    logic.check(2);
+    if (!block.isBlocked) {
+      this.checkPossibilities();
+      ui.changeNextFigure();
+      logic.check(2);
+    }
   },
 
   checkPossibilities: function checkPossibilities() {
@@ -546,6 +550,10 @@ var win = {
 
   showInfo: function showInfo() {
     document.getElementById('win-info').classList.add("win-info--visible");
+  },
+
+  hideInfo: function hideInfo() {
+    document.getElementById('win-info').classList.remove("win-info--visible");
   }
 };
 

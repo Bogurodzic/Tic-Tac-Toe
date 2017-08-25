@@ -156,7 +156,7 @@ body {
 .game-start {
   margin-top: 40px;
   margin-bottom: 40px;
-  font-size: 16px;
+  font-size: 20px;
   text-align: center; }
 
 .information {
@@ -165,8 +165,9 @@ body {
 
 .information__turn {
   text-align: center;
-  font-size: 20px;
-  color: #D77400; }
+  font-size: 21px;
+  color: #D77400;
+  font-weight: bold; }
 
 .information__turn--other-color {
   color: #7DBEA7; }
