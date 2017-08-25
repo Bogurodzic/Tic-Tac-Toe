@@ -42,6 +42,8 @@ let vsComputer = {
   start: function(){
     addEvents();
     ui.changeTurnInformation();
+    computer.doTurn();
+    computer.doTurn();
   }
 }
 

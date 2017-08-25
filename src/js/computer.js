@@ -17,14 +17,19 @@ let computer = {
     }
   },
 
+
   checkPossibilities: function(){
     let allFiguresFromAllSpots = logic.getFiguresFromAllSpots();
     let that = this;
 
-    for (let winPossibilities of this.winPossibilities) {
-      if(checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])){
-        placeFigureInFreeSpot(winPossibilities);
-        break;
+    if (allFiguresFromAllSpots[4] === 0 ){
+      this.placeFigure(4);
+    } else {
+      for (let winPossibilities of this.winPossibilities) {
+        if(checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])){
+          placeFigureInFreeSpot(winPossibilities);
+          break;
+        }
       }
     }
 
