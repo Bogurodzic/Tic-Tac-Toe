@@ -1,0 +1,11 @@
+@import "game-start__text";
+@import "game-start__options";
+@import "game-start__options--computer";
+@import "game-start__options--human";
+
+.game-start {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-size: 16px;
+  text-align: center;
+}

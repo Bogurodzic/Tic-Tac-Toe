@@ -141,6 +141,24 @@ body {
       -ms-transform: translateX(-50%);
           transform: translateX(-50%); }
 
+.game-start__options--computer {
+  font-weight: bold;
+  color: #7DBEA7; }
+  .game-start__options--computer:hover {
+    cursor: pointer; }
+
+.game-start__options--human {
+  font-weight: bold;
+  color: #D77400; }
+  .game-start__options--human:hover {
+    cursor: pointer; }
+
+.game-start {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-size: 16px;
+  text-align: center; }
+
 .information__turn {
   text-align: center; }
 
