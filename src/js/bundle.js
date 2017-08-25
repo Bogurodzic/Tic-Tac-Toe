@@ -519,11 +519,16 @@ var block = __webpack_require__(1);
 var win = {
   init: function init(figure) {
     this.showFigure(figure);
+    this.showInfo();
     block.blockGame();
   },
 
   showFigure: function showFigure(figure) {
-    document.getElementById("win-info-figure").innerHTML = figure === 1 ? "circle" : "square";
+    document.getElementById("win-info-figure").innerHTML = figure === 1 ? "Circle" : "Square";
+  },
+
+  showInfo: function showInfo() {
+    document.getElementById('win-info').classList.add("win-info--visible");
   }
 };
 

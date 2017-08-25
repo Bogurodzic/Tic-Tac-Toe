@@ -1,5 +1,9 @@
-@import "win-info__text";
-
 .win-info {
+  display: none;
   text-align: center;
+  font-size: 26px;
 }
+
+@import "win-info__text";
+@import "win-info__text--colored";
+@import "win-info--visible";
