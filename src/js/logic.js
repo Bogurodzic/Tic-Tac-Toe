@@ -1,3 +1,5 @@
+let win = require("./win");
+
 let logic = {
   //0 = nothing, 1 = circle, 2 = square
   allSpots: [],
@@ -51,12 +53,14 @@ let logic = {
   checkRightAcross: function(figure){
     if(this.allSpots[0] === figure && this.allSpots[4] === figure && this.allSpots[8] === figure){
       console.log(figure + "win!");
+      win.init(figure);
     }
   },
 
   checkLeftAcross: function(figure){
     if(this.allSpots[2] === figure && this.allSpots[4] === figure && this.allSpots[6] === figure){
       console.log(figure + "win!");
+      win.init(figure);
     }
   },
 
@@ -75,12 +79,14 @@ let logic = {
   checkHorizontally: function(figure, index){
     if(this.allSpots[0 + index*3] === figure && this.allSpots[1 + index*3] === figure && this.allSpots[2 + index*3] === figure){
       console.log(figure + "win!");
+      win.init(figure);
     }
   },
 
   checkVertically: function(figure, index){
     if(this.allSpots[0 + index] === figure && this.allSpots[3 + index] === figure && this.allSpots[6 + index] === figure){
       console.log(figure + "win!");
+      win.init(figure);
     }
   },
 }

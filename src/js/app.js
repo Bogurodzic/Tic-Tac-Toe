@@ -3,6 +3,7 @@ let ui = require("./ui");
 let logic = require("./logic");
 let message = require("./message");
 let computer = require("./computer");
+let block = require("./block");
 
 
 function addDrawEvents(){
@@ -20,11 +21,13 @@ function handleClickEvent(){
 }
 
 function doTurn(place){
-  draw.drawNewFigure(place);
-  ui.changeNextFigure();
-  ui.changeTurnInformation();
-  checkWinCondition(ui.nextFigure);
-  computer.doTurn();
+  if(!block.isBlocked){
+    draw.drawNewFigure(place);
+    ui.changeNextFigure();
+    ui.changeTurnInformation();
+    checkWinCondition(ui.nextFigure);
+    computer.doTurn();
+  }
 }
 
 let checkWinCondition = (nextFigure) => nextFigure === "circle" ? logic.check(2) : logic.check(1);

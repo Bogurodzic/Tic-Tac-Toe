@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -135,6 +135,8 @@ module.exports = figure;
 "use strict";
 
 
+var win = __webpack_require__(5);
+
 var logic = {
   //0 = nothing, 1 = circle, 2 = square
   allSpots: [],
@@ -192,12 +194,14 @@ var logic = {
   checkRightAcross: function checkRightAcross(figure) {
     if (this.allSpots[0] === figure && this.allSpots[4] === figure && this.allSpots[8] === figure) {
       console.log(figure + "win!");
+      win.init(figure);
     }
   },
 
   checkLeftAcross: function checkLeftAcross(figure) {
     if (this.allSpots[2] === figure && this.allSpots[4] === figure && this.allSpots[6] === figure) {
       console.log(figure + "win!");
+      win.init(figure);
     }
   },
 
@@ -216,12 +220,14 @@ var logic = {
   checkHorizontally: function checkHorizontally(figure, index) {
     if (this.allSpots[0 + index * 3] === figure && this.allSpots[1 + index * 3] === figure && this.allSpots[2 + index * 3] === figure) {
       console.log(figure + "win!");
+      win.init(figure);
     }
   },
 
   checkVertically: function checkVertically(figure, index) {
     if (this.allSpots[0 + index] === figure && this.allSpots[3 + index] === figure && this.allSpots[6 + index] === figure) {
       console.log(figure + "win!");
+      win.init(figure);
     }
   }
 };
@@ -235,11 +241,33 @@ module.exports = logic;
 "use strict";
 
 
+var block = {
+  isBlocked: false,
+
+  blockGame: function blockGame() {
+    this.isBlocked = true;
+  },
+
+  unblockGame: function unblockGame() {
+    this.isBlocked = false;
+  }
+};
+
+module.exports = block;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var draw = __webpack_require__(1);
 var ui = __webpack_require__(0);
 var logic = __webpack_require__(2);
-var message = __webpack_require__(4);
-var computer = __webpack_require__(5);
+var message = __webpack_require__(6);
+var computer = __webpack_require__(7);
+var block = __webpack_require__(3);
 
 function addDrawEvents() {
   logic.getAllSpots().forEach(function (spot) {
@@ -260,11 +288,13 @@ function handleClickEvent() {
 }
 
 function doTurn(place) {
-  draw.drawNewFigure(place);
-  ui.changeNextFigure();
-  ui.changeTurnInformation();
-  checkWinCondition(ui.nextFigure);
-  computer.doTurn();
+  if (!block.isBlocked) {
+    draw.drawNewFigure(place);
+    ui.changeNextFigure();
+    ui.changeTurnInformation();
+    checkWinCondition(ui.nextFigure);
+    computer.doTurn();
+  }
 }
 
 var checkWinCondition = function checkWinCondition(nextFigure) {
@@ -275,7 +305,29 @@ addDrawEvents();
 ui.changeTurnInformation();
 
 /***/ }),
-/* 4 */
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var block = __webpack_require__(3);
+
+var win = {
+  init: function init(figure) {
+    this.showFigure(figure);
+    block.blockGame();
+  },
+
+  showFigure: function showFigure(figure) {
+    document.getElementById("win-info-figure").innerHTML = figure === 1 ? "circle" : "square";
+  }
+};
+
+module.exports = win;
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -314,7 +366,7 @@ var message = {
 module.exports = message;
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
