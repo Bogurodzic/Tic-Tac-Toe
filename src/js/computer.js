@@ -10,7 +10,7 @@ let computer = {
   doTurn: function(){
     this.checkPossibilities();
     ui.changeNextFigure();
-    logic.check(2);
+    logic.check(1);
   },
 
   checkPossibilities: function(){
@@ -18,14 +18,16 @@ let computer = {
     let that = this;
 
     for (let winPossibilities of this.winPossibilities) {
-      if(checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])){
+      if (!logic.hasFigure(logic.getPlaceByIndex(4))) {
+        this.placeFigure(4);
+      } else if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])){
         placeFigureInFreeSpot(winPossibilities);
         break;
       }
     }
 
     function checkSpot(index){
-      if(allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === 2){
+      if(allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === 1){
         return true;
       } else {
         return false;

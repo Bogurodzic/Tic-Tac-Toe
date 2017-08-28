@@ -355,7 +355,7 @@ var computer = {
   doTurn: function doTurn() {
     this.checkPossibilities();
     ui.changeNextFigure();
-    logic.check(2);
+    logic.check(1);
   },
 
   checkPossibilities: function checkPossibilities() {
@@ -370,7 +370,9 @@ var computer = {
       for (var _iterator = this.winPossibilities[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var winPossibilities = _step.value;
 
-        if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])) {
+        if (!logic.hasFigure(logic.getPlaceByIndex(4))) {
+          this.placeFigure(4);
+        } else if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])) {
           placeFigureInFreeSpot(winPossibilities);
           break;
         }
@@ -391,7 +393,7 @@ var computer = {
     }
 
     function checkSpot(index) {
-      if (allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === 2) {
+      if (allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === 1) {
         return true;
       } else {
         return false;
@@ -524,6 +526,7 @@ var checkWinCondition = function checkWinCondition(nextFigure) {
 
 var vsComputer = {
   start: function start() {
+    computer.doTurn();
     addEvents();
     ui.changeTurnInformation();
   }
