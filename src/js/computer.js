@@ -32,10 +32,7 @@ let computer = {
         break ;
       }
     }
-
-    if (winnableSpots === 0 ){
-      placeFigureInFreeSpot([0,1,2,3,4,5,6,7,8])
-    }
+    ifNoChanceToWin();
 
     function checkSpot(index){
       if(allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === that.getNextComputerFigureNumber()){
@@ -52,6 +49,12 @@ let computer = {
           that.placeFigure(spot);
           break;
         }
+      }
+    }
+
+    function ifNoChanceToWin(){
+      if (winnableSpots === 0 ){
+        placeFigureInFreeSpot([0,1,2,3,4,5,6,7,8])
       }
     }
 
