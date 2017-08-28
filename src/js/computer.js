@@ -20,14 +20,21 @@ let computer = {
   checkPossibilities: function(){
     let allFiguresFromAllSpots = logic.getFiguresFromAllSpots();
     let that = this;
+    let winnableSpots = 0;
 
     for (let winPossibilities of this.winPossibilities) {
       if (!logic.hasFigure(logic.getPlaceByIndex(4))) {
         this.placeFigure(4);
       } else if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])){
         placeFigureInFreeSpot(winPossibilities);
-        break;
+        //If there is no winnableSpots place a figure at random place
+        winnableSpots++;
+        break ;
       }
+    }
+
+    if (winnableSpots === 0 ){
+      placeFigureInFreeSpot([0,1,2,3,4,5,6,7,8])
     }
 
     function checkSpot(index){
@@ -41,6 +48,7 @@ let computer = {
     function placeFigureInFreeSpot(spots){
       for (let spot of spots) {
         if(allFiguresFromAllSpots[spot] === 0){
+          console.log(spot);
           that.placeFigure(spot);
           break;
         }

@@ -368,6 +368,7 @@ var computer = {
   checkPossibilities: function checkPossibilities() {
     var allFiguresFromAllSpots = logic.getFiguresFromAllSpots();
     var that = this;
+    var winnableSpots = 0;
 
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
@@ -381,6 +382,7 @@ var computer = {
           this.placeFigure(4);
         } else if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])) {
           placeFigureInFreeSpot(winPossibilities);
+          winnableSpots++;
           break;
         }
       }
@@ -397,6 +399,10 @@ var computer = {
           throw _iteratorError;
         }
       }
+    }
+
+    if (winnableSpots === 0) {
+      placeFigureInFreeSpot([0, 1, 2, 3, 4, 5, 6, 7, 8]);
     }
 
     function checkSpot(index) {
@@ -417,6 +423,7 @@ var computer = {
           var spot = _step2.value;
 
           if (allFiguresFromAllSpots[spot] === 0) {
+            console.log(spot);
             that.placeFigure(spot);
             break;
           }
