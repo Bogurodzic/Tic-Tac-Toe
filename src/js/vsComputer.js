@@ -43,8 +43,6 @@ let vsComputer = {
     computer.doTurn();
     addEvents();
     ui.changeTurnInformation();
-    computer.doTurn();
-    computer.doTurn();
   }
 }
 
