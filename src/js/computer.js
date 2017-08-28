@@ -1,6 +1,7 @@
 let logic = require("./logic");
 let ui = require("./ui");
 let draw = require("./draw");
+let block = require("./block");
 
 
 let computer = {
@@ -12,6 +13,7 @@ let computer = {
     ui.changeNextFigure();
     logic.check(1);
   },
+
 
   checkPossibilities: function(){
     let allFiguresFromAllSpots = logic.getFiguresFromAllSpots();

@@ -280,7 +280,7 @@ var logic = {
     this.clearBoard();
     block.unblockGame();
     ui.showTurnInformation();
-    ui.hideWinInfo();
+
   },
 
   clearBoard: function clearBoard() {
@@ -347,47 +347,49 @@ module.exports = message;
 var logic = __webpack_require__(3);
 var ui = __webpack_require__(0);
 var draw = __webpack_require__(2);
+var block = __webpack_require__(1);
 
 var computer = {
   winPossibilities: [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]],
   computerFigure: ui.getComputerFigure(),
 
   doTurn: function doTurn() {
-    this.checkPossibilities();
-    ui.changeNextFigure();
-    logic.check(1);
+
   },
 
   checkPossibilities: function checkPossibilities() {
     var allFiguresFromAllSpots = logic.getFiguresFromAllSpots();
     var that = this;
 
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+    if (allFiguresFromAllSpots[4] === 0) {
+      this.placeFigure(4);
+    } else {
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
-    try {
-      for (var _iterator = this.winPossibilities[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var winPossibilities = _step.value;
 
-        if (!logic.hasFigure(logic.getPlaceByIndex(4))) {
-          this.placeFigure(4);
-        } else if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])) {
-          placeFigureInFreeSpot(winPossibilities);
-          break;
-        }
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
       try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
+        for (var _iterator = this.winPossibilities[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var winPossibilities = _step.value;
+
+          if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])) {
+            placeFigureInFreeSpot(winPossibilities);
+            break;
+          }
         }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
         }
       }
     }
@@ -529,6 +531,8 @@ var vsComputer = {
     computer.doTurn();
     addEvents();
     ui.changeTurnInformation();
+    computer.doTurn();
+    computer.doTurn();
   }
 };
 
@@ -554,6 +558,7 @@ var win = {
 
   showFigure: function showFigure(figure) {
     document.getElementById("win-info-figure").innerHTML = figure === 1 ? "Circle" : "Square";
+
   }
 };
 
