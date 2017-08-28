@@ -228,7 +228,7 @@ var logic = {
   },
 
   checkIfWin: function checkIfWin(figure) {
-    console.log("Sprawdzamy!");
+    console.log("Sprawdzamy!:   " + figure);
     this.checkRightAcross(figure);
     this.checkLeftAcross(figure);
     this.checkAllHorizontally(figure);
@@ -280,7 +280,8 @@ var logic = {
     this.clearBoard();
     block.unblockGame();
     ui.showTurnInformation();
-
+    ui.hideWinInfo();
+    ui.changeTurnInformation();
   },
 
   clearBoard: function clearBoard() {
@@ -354,48 +355,52 @@ var computer = {
   computerFigure: ui.getComputerFigure(),
 
   doTurn: function doTurn() {
+    this.checkPossibilities();
+    ui.changeNextFigure();
+    ui.changeTurnInformation();
+    logic.check(this.getNextComputerFigureNumber());
+  },
 
+  getNextComputerFigureNumber: function getNextComputerFigureNumber() {
+    return ui.nextFigure === "circle" ? 2 : 1;
   },
 
   checkPossibilities: function checkPossibilities() {
     var allFiguresFromAllSpots = logic.getFiguresFromAllSpots();
     var that = this;
 
-    if (allFiguresFromAllSpots[4] === 0) {
-      this.placeFigure(4);
-    } else {
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
 
+    try {
+      for (var _iterator = this.winPossibilities[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var winPossibilities = _step.value;
 
-      try {
-        for (var _iterator = this.winPossibilities[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var winPossibilities = _step.value;
-
-          if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])) {
-            placeFigureInFreeSpot(winPossibilities);
-            break;
-          }
+        if (!logic.hasFigure(logic.getPlaceByIndex(4))) {
+          this.placeFigure(4);
+        } else if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])) {
+          placeFigureInFreeSpot(winPossibilities);
+          break;
         }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
       } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
+        if (_didIteratorError) {
+          throw _iteratorError;
         }
       }
     }
 
     function checkSpot(index) {
-      if (allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === 1) {
+      if (allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === that.getNextComputerFigureNumber()) {
         return true;
       } else {
         return false;
@@ -500,7 +505,8 @@ var addHandleClickEvent = function addHandleClickEvent(spot) {
 };
 var addResetEvent = function addResetEvent() {
   document.getElementById("reset").addEventListener("click", function () {
-    return logic.resetAll();
+    logic.resetAll();
+    computer.doTurn();
   });
 };
 
@@ -531,8 +537,6 @@ var vsComputer = {
     computer.doTurn();
     addEvents();
     ui.changeTurnInformation();
-    computer.doTurn();
-    computer.doTurn();
   }
 };
 
@@ -553,12 +557,12 @@ var win = {
     this.showFigure(figure);
     ui.showWinInfo();
     ui.hideTurnInformation();
+    ui.changeNextFigure();
     block.blockGame();
   },
 
   showFigure: function showFigure(figure) {
     document.getElementById("win-info-figure").innerHTML = figure === 1 ? "Circle" : "Square";
-
   }
 };
 

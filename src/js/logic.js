@@ -45,7 +45,7 @@ let logic = {
   },
 
   checkIfWin: function(figure){
-    console.log("Sprawdzamy!")
+    console.log("Sprawdzamy!:   " + figure);
     this.checkRightAcross(figure);
     this.checkLeftAcross(figure);
     this.checkAllHorizontally(figure);
@@ -98,7 +98,7 @@ let logic = {
     block.unblockGame();
     ui.showTurnInformation();
     ui.hideWinInfo();
-
+    ui.changeTurnInformation();
   },
 
   clearBoard: function(){

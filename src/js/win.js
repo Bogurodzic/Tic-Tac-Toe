@@ -6,6 +6,7 @@ let win = {
     this.showFigure(figure);
     ui.showWinInfo();
     ui.hideTurnInformation();
+    ui.changeNextFigure();
     block.blockGame();
   },
 
