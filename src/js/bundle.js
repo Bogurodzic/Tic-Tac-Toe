@@ -103,6 +103,14 @@ var ui = {
 
   capitalize: function capitalize(text) {
     return text.charAt(0).toUpperCase() + text.slice(1);
+  },
+
+  showWinInfo: function showWinInfo() {
+    document.getElementById('win-info').classList.add("win-info--visible");
+  },
+
+  hideWinInfo: function hideWinInfo() {
+    document.getElementById('win-info').classList.remove("win-info--visible");
   }
 };
 
@@ -272,7 +280,7 @@ var logic = {
     this.clearBoard();
     block.unblockGame();
     ui.showTurnInformation();
-    win.hideInfo();
+
   },
 
   clearBoard: function clearBoard() {
@@ -346,12 +354,7 @@ var computer = {
   computerFigure: ui.getComputerFigure(),
 
   doTurn: function doTurn() {
-    if (!block.isBlocked) {
-      this.checkPossibilities();
-      ui.changeNextFigure();
-      ui.changeTurnInformation();
-      logic.check(2);
-    }
+
   },
 
   checkPossibilities: function checkPossibilities() {
@@ -364,6 +367,7 @@ var computer = {
       var _iteratorNormalCompletion = true;
       var _didIteratorError = false;
       var _iteratorError = undefined;
+
 
       try {
         for (var _iterator = this.winPossibilities[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
@@ -391,7 +395,7 @@ var computer = {
     }
 
     function checkSpot(index) {
-      if (allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === 2) {
+      if (allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === 1) {
         return true;
       } else {
         return false;
@@ -524,6 +528,7 @@ var checkWinCondition = function checkWinCondition(nextFigure) {
 
 var vsComputer = {
   start: function start() {
+    computer.doTurn();
     addEvents();
     ui.changeTurnInformation();
     computer.doTurn();
@@ -546,21 +551,14 @@ var ui = __webpack_require__(0);
 var win = {
   init: function init(figure) {
     this.showFigure(figure);
-    this.showInfo();
+    ui.showWinInfo();
     ui.hideTurnInformation();
     block.blockGame();
   },
 
   showFigure: function showFigure(figure) {
     document.getElementById("win-info-figure").innerHTML = figure === 1 ? "Circle" : "Square";
-  },
 
-  showInfo: function showInfo() {
-    document.getElementById('win-info').classList.add("win-info--visible");
-  },
-
-  hideInfo: function hideInfo() {
-    document.getElementById('win-info').classList.remove("win-info--visible");
   }
 };
 

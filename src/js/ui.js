@@ -31,6 +31,14 @@ let ui = {
 
   capitalize: function(text){
     return text.charAt(0).toUpperCase() + text.slice(1);
+  },
+
+  showWinInfo: function(){
+    document.getElementById('win-info').classList.add("win-info--visible");
+  },
+
+  hideWinInfo: function(){
+    document.getElementById('win-info').classList.remove("win-info--visible");
   }
 }
 

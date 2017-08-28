@@ -97,7 +97,8 @@ let logic = {
     this.clearBoard();
     block.unblockGame();
     ui.showTurnInformation();
-    win.hideInfo();
+    ui.hideWinInfo();
+
   },
 
   clearBoard: function(){

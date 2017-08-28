@@ -9,12 +9,9 @@ let computer = {
   computerFigure : ui.getComputerFigure(),
 
   doTurn: function(){
-    if(!block.isBlocked){
-      this.checkPossibilities();
-      ui.changeNextFigure();
-      ui.changeTurnInformation();
-      logic.check(2);
-    }
+    this.checkPossibilities();
+    ui.changeNextFigure();
+    logic.check(1);
   },
 
 
@@ -22,19 +19,17 @@ let computer = {
     let allFiguresFromAllSpots = logic.getFiguresFromAllSpots();
     let that = this;
 
-    if (allFiguresFromAllSpots[4] === 0 ){
-      this.placeFigure(4);
-    } else {
-      for (let winPossibilities of this.winPossibilities) {
-        if(checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])){
-          placeFigureInFreeSpot(winPossibilities);
-          break;
-        }
+    for (let winPossibilities of this.winPossibilities) {
+      if (!logic.hasFigure(logic.getPlaceByIndex(4))) {
+        this.placeFigure(4);
+      } else if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])){
+        placeFigureInFreeSpot(winPossibilities);
+        break;
       }
     }
 
     function checkSpot(index){
-      if(allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === 2){
+      if(allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === 1){
         return true;
       } else {
         return false;
