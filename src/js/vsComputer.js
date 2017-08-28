@@ -13,7 +13,10 @@ function addEvents(){
 
 let addHandleClickEvent = (spot) => spot.addEventListener("click", handleClickEvent);
 let addResetEvent = () => {
-  document.getElementById("reset").addEventListener("click", () => logic.resetAll());
+  document.getElementById("reset").addEventListener("click", () => {
+    logic.resetAll()
+    computer.doTurn();
+  });
 }
 
 function handleClickEvent(){

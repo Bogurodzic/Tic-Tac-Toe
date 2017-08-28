@@ -11,9 +11,11 @@ let computer = {
   doTurn: function(){
     this.checkPossibilities();
     ui.changeNextFigure();
-    logic.check(1);
+    ui.changeTurnInformation();
+    logic.check(this.getNextComputerFigureNumber());
   },
 
+  getNextComputerFigureNumber: () => ui.nextFigure === "circle" ? 2 : 1,
 
   checkPossibilities: function(){
     let allFiguresFromAllSpots = logic.getFiguresFromAllSpots();
@@ -29,7 +31,7 @@ let computer = {
     }
 
     function checkSpot(index){
-      if(allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === 1){
+      if(allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === that.getNextComputerFigureNumber()){
         return true;
       } else {
         return false;

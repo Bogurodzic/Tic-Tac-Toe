@@ -228,7 +228,7 @@ var logic = {
   },
 
   checkIfWin: function checkIfWin(figure) {
-    console.log("Sprawdzamy!");
+    console.log("Sprawdzamy!:   " + figure);
     this.checkRightAcross(figure);
     this.checkLeftAcross(figure);
     this.checkAllHorizontally(figure);
@@ -281,6 +281,7 @@ var logic = {
     block.unblockGame();
     ui.showTurnInformation();
     ui.hideWinInfo();
+    ui.changeTurnInformation();
   },
 
   clearBoard: function clearBoard() {
@@ -356,7 +357,12 @@ var computer = {
   doTurn: function doTurn() {
     this.checkPossibilities();
     ui.changeNextFigure();
-    logic.check(1);
+    ui.changeTurnInformation();
+    logic.check(this.getNextComputerFigureNumber());
+  },
+
+  getNextComputerFigureNumber: function getNextComputerFigureNumber() {
+    return ui.nextFigure === "circle" ? 2 : 1;
   },
 
   checkPossibilities: function checkPossibilities() {
@@ -394,7 +400,7 @@ var computer = {
     }
 
     function checkSpot(index) {
-      if (allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === 1) {
+      if (allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === that.getNextComputerFigureNumber()) {
         return true;
       } else {
         return false;
@@ -499,7 +505,8 @@ var addHandleClickEvent = function addHandleClickEvent(spot) {
 };
 var addResetEvent = function addResetEvent() {
   document.getElementById("reset").addEventListener("click", function () {
-    return logic.resetAll();
+    logic.resetAll();
+    computer.doTurn();
   });
 };
 
@@ -530,8 +537,6 @@ var vsComputer = {
     computer.doTurn();
     addEvents();
     ui.changeTurnInformation();
-    computer.doTurn();
-    computer.doTurn();
   }
 };
 
@@ -552,6 +557,7 @@ var win = {
     this.showFigure(figure);
     ui.showWinInfo();
     ui.hideTurnInformation();
+    ui.changeNextFigure();
     block.blockGame();
   },
 
