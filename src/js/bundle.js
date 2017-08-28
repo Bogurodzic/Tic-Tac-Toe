@@ -103,6 +103,14 @@ var ui = {
 
   capitalize: function capitalize(text) {
     return text.charAt(0).toUpperCase() + text.slice(1);
+  },
+
+  showWinInfo: function showWinInfo() {
+    document.getElementById('win-info').classList.add("win-info--visible");
+  },
+
+  hideWinInfo: function hideWinInfo() {
+    document.getElementById('win-info').classList.remove("win-info--visible");
   }
 };
 
@@ -272,6 +280,7 @@ var logic = {
     this.clearBoard();
     block.unblockGame();
     ui.showTurnInformation();
+    ui.hideWinInfo();
   },
 
   clearBoard: function clearBoard() {
@@ -535,17 +544,13 @@ var ui = __webpack_require__(0);
 var win = {
   init: function init(figure) {
     this.showFigure(figure);
-    this.showInfo();
+    ui.showWinInfo();
     ui.hideTurnInformation();
     block.blockGame();
   },
 
   showFigure: function showFigure(figure) {
     document.getElementById("win-info-figure").innerHTML = figure === 1 ? "Circle" : "Square";
-  },
-
-  showInfo: function showInfo() {
-    document.getElementById('win-info').classList.add("win-info--visible");
   }
 };
 
