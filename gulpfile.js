@@ -29,7 +29,7 @@ gulp.task("autoprefixer", function(){
 });
 
 gulp.task("copy", function(){
-	return gulp.src(["src/fonts/*", "src/css/*", "src/img/*", "src/js/bundle.js", "src/audio/*", "src/index.html"], {
+	return gulp.src(["src/css/main.css", "src/js/bundle.js", "src/index.html"], {
 		base: "src/"
 	})
 	.pipe(gulp.dest("build/"));
