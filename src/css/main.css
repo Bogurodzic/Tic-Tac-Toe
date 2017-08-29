@@ -187,7 +187,9 @@ body {
   color: #7DBEA7; }
 
 .win-info {
-  display: none;
+  display: block;
+  opacity: 0;
+  height: 0;
   text-align: center;
   font-size: 26px; }
 
@@ -196,7 +198,10 @@ body {
   font-weight: bold; }
 
 .win-info--visible {
-  display: block; }
+  -webkit-animation: show 3s 0;
+  animation: show 3s 0;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards; }
 
 .reset {
   width: 150px;
