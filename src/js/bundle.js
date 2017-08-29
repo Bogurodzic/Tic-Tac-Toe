@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -177,7 +177,7 @@ module.exports = figure;
 "use strict";
 
 
-var win = __webpack_require__(8);
+var win = __webpack_require__(5);
 var block = __webpack_require__(1);
 var ui = __webpack_require__(0);
 
@@ -228,7 +228,6 @@ var logic = {
   },
 
   checkIfWin: function checkIfWin(figure) {
-    console.log("Sprawdzamy!:   " + figure);
     this.checkRightAcross(figure);
     this.checkLeftAcross(figure);
     this.checkAllHorizontally(figure);
@@ -237,14 +236,12 @@ var logic = {
 
   checkRightAcross: function checkRightAcross(figure) {
     if (this.allSpots[0] === figure && this.allSpots[4] === figure && this.allSpots[8] === figure) {
-      console.log(figure + "win!");
       win.init(figure);
     }
   },
 
   checkLeftAcross: function checkLeftAcross(figure) {
     if (this.allSpots[2] === figure && this.allSpots[4] === figure && this.allSpots[6] === figure) {
-      console.log(figure + "win!");
       win.init(figure);
     }
   },
@@ -263,14 +260,12 @@ var logic = {
 
   checkHorizontally: function checkHorizontally(figure, index) {
     if (this.allSpots[0 + index * 3] === figure && this.allSpots[1 + index * 3] === figure && this.allSpots[2 + index * 3] === figure) {
-      console.log(figure + "win!");
       win.init(figure);
     }
   },
 
   checkVertically: function checkVertically(figure, index) {
     if (this.allSpots[0 + index] === figure && this.allSpots[3 + index] === figure && this.allSpots[6 + index] === figure) {
-      console.log(figure + "win!");
       win.init(figure);
     }
   },
@@ -345,10 +340,43 @@ module.exports = message;
 "use strict";
 
 
+var block = __webpack_require__(1);
+var ui = __webpack_require__(0);
+var message = __webpack_require__(4);
+
+var win = {
+  init: function init(figure) {
+    this.showFigure(figure);
+    ui.showWinInfo();
+    ui.hideTurnInformation();
+    ui.changeNextFigure();
+    block.blockGame();
+  },
+
+  showFigure: function showFigure(figure) {
+    document.getElementById("win-info-figure").innerHTML = figure === 1 ? "Circle" : "Square";
+  },
+
+  draw: function draw() {
+    block.blockGame();
+    message.new("It is a draw!");
+  }
+};
+
+module.exports = win;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var logic = __webpack_require__(3);
 var ui = __webpack_require__(0);
 var draw = __webpack_require__(2);
 var block = __webpack_require__(1);
+var win = __webpack_require__(5);
 
 var computer = {
   winPossibilities: [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]],
@@ -359,6 +387,7 @@ var computer = {
     ui.changeNextFigure();
     ui.changeTurnInformation();
     logic.check(this.getNextComputerFigureNumber());
+    this.checkForDraw();
   },
 
   getNextComputerFigureNumber: function getNextComputerFigureNumber() {
@@ -422,7 +451,6 @@ var computer = {
           var spot = _step2.value;
 
           if (allFiguresFromAllSpots[spot] === 0) {
-            console.log(spot);
             that.placeFigure(spot);
             break;
           }
@@ -450,6 +478,16 @@ var computer = {
     }
   },
 
+  checkForNumber: function checkForNumber(num) {
+    return logic.getFiguresFromAllSpots().indexOf(num) > -1;
+  },
+
+  checkForDraw: function checkForDraw() {
+    if (!this.checkForNumber(0)) {
+      win.draw();
+    }
+  },
+
   placeFigure: function placeFigure(index) {
     draw.drawNewFigure(logic.getPlaceByIndex(index));
   }
@@ -459,13 +497,13 @@ var computer = {
 module.exports = computer;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var vsComputer = __webpack_require__(7);
+var vsComputer = __webpack_require__(8);
 var vsHuman = __webpack_require__(9);
 
 var getGameStart = function getGameStart() {
@@ -492,7 +530,7 @@ getGameStart().addEventListener("click", function () {
 });
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -502,7 +540,7 @@ var draw = __webpack_require__(2);
 var ui = __webpack_require__(0);
 var logic = __webpack_require__(3);
 var message = __webpack_require__(4);
-var computer = __webpack_require__(5);
+var computer = __webpack_require__(6);
 var block = __webpack_require__(1);
 
 function addEvents() {
@@ -555,32 +593,6 @@ var vsComputer = {
 module.exports = vsComputer;
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var block = __webpack_require__(1);
-var ui = __webpack_require__(0);
-
-var win = {
-  init: function init(figure) {
-    this.showFigure(figure);
-    ui.showWinInfo();
-    ui.hideTurnInformation();
-    ui.changeNextFigure();
-    block.blockGame();
-  },
-
-  showFigure: function showFigure(figure) {
-    document.getElementById("win-info-figure").innerHTML = figure === 1 ? "Circle" : "Square";
-  }
-};
-
-module.exports = win;
-
-/***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -591,7 +603,7 @@ var draw = __webpack_require__(2);
 var ui = __webpack_require__(0);
 var logic = __webpack_require__(3);
 var message = __webpack_require__(4);
-var computer = __webpack_require__(5);
+var computer = __webpack_require__(6);
 var block = __webpack_require__(1);
 
 function addEvents() {

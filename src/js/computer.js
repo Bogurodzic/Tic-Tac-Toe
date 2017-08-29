@@ -2,6 +2,7 @@ let logic = require("./logic");
 let ui = require("./ui");
 let draw = require("./draw");
 let block = require("./block");
+let win = require("./win");
 
 
 let computer = {
@@ -13,6 +14,7 @@ let computer = {
     ui.changeNextFigure();
     ui.changeTurnInformation();
     logic.check(this.getNextComputerFigureNumber());
+    this.checkForDraw();
   },
 
   getNextComputerFigureNumber: () => ui.nextFigure === "circle" ? 2 : 1,
@@ -45,7 +47,6 @@ let computer = {
     function placeFigureInFreeSpot(spots){
       for (let spot of spots) {
         if(allFiguresFromAllSpots[spot] === 0){
-          console.log(spot);
           that.placeFigure(spot);
           break;
         }
@@ -58,6 +59,16 @@ let computer = {
       }
     }
 
+  },
+
+  checkForNumber: function(num){
+    return logic.getFiguresFromAllSpots().indexOf(num) > -1
+  },
+
+  checkForDraw: function(){
+    if(!this.checkForNumber(0)){
+      win.draw();
+    }
   },
 
   placeFigure: function(index){
