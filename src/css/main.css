@@ -78,27 +78,25 @@ table {
 
 @-webkit-keyframes slide {
   0% {
-    left: 100%;
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
-    position: absolute; }
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%); }
+  80% {
+    -webkit-transform: translateX(20%);
+            transform: translateX(20%); }
   100% {
-    left: 0%;
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-    position: static; } }
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%); } }
 
 @keyframes slide {
   0% {
-    left: 100%;
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
-    position: absolute; }
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%); }
+  80% {
+    -webkit-transform: translateX(20%);
+            transform: translateX(20%); }
   100% {
-    left: 0%;
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-    position: static; } }
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%); } }
 
 body {
   position: relative; }
@@ -156,10 +154,26 @@ body {
   margin: 0 auto;
   margin-top: 50px;
   left: 0px;
-  -webkit-animation: slide 3s 0;
-  animation: slide 3s 0;
+  -webkit-animation-delay: 0s;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-name: "slide";
   -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards; }
+  /* this prevents the animation from restarting! */
+  -moz-animation-delay: 0s;
+  -moz-animation-duration: 3s;
+  -moz-animation-name: "slide";
+  -moz-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  -o-animation-delay: 0s;
+  -o-animation-duration: 3s;
+  -o-animation-name: "slide";
+  -o-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  animation-delay: 0s;
+  animation-duration: 3s;
+  animation-name: "slide";
+  animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */ }
 
 .circle {
   width: 60px;
@@ -201,10 +215,26 @@ body {
   margin-bottom: 40px;
   font-size: 20px;
   text-align: center;
-  -webkit-animation: slide 3s 0;
-  animation: slide 3s 0;
+  -webkit-animation-delay: 0s;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-name: "slide";
   -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards; }
+  /* this prevents the animation from restarting! */
+  -moz-animation-delay: 0s;
+  -moz-animation-duration: 3s;
+  -moz-animation-name: "slide";
+  -moz-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  -o-animation-delay: 0s;
+  -o-animation-duration: 3s;
+  -o-animation-name: "slide";
+  -o-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  animation-delay: 0s;
+  animation-duration: 3s;
+  animation-name: "slide";
+  animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */ }
 
 .information {
   margin-top: 20px;
@@ -231,10 +261,26 @@ body {
   font-weight: bold; }
 
 .win-info--visible {
-  -webkit-animation: show 3s 0;
-  animation: show 3s 0;
+  -webkit-animation-delay: 0s;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-name: "show";
   -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards; }
+  /* this prevents the animation from restarting! */
+  -moz-animation-delay: 0s;
+  -moz-animation-duration: 3s;
+  -moz-animation-name: "show";
+  -moz-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  -o-animation-delay: 0s;
+  -o-animation-duration: 3s;
+  -o-animation-name: "show";
+  -o-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  animation-delay: 0s;
+  animation-duration: 3s;
+  animation-name: "show";
+  animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */ }
 
 .reset {
   width: 150px;
@@ -242,10 +288,26 @@ body {
   margin: 0 auto;
   margin-top: 30px;
   border: 1px dashed black;
-  -webkit-animation: slide 3s 0;
-  animation: slide 3s 0;
+  -webkit-animation-delay: 0s;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-name: "slide";
   -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards; }
+  /* this prevents the animation from restarting! */
+  -moz-animation-delay: 0s;
+  -moz-animation-duration: 3s;
+  -moz-animation-name: "slide";
+  -moz-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  -o-animation-delay: 0s;
+  -o-animation-duration: 3s;
+  -o-animation-name: "slide";
+  -o-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  animation-delay: 0s;
+  animation-duration: 3s;
+  animation-name: "slide";
+  animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */ }
   .reset:hover {
     cursor: pointer; }
 
@@ -257,10 +319,26 @@ body {
   font-size: 26px; }
 
 .draw-info--visible {
-  -webkit-animation: show 3s 0;
-  animation: show 3s 0;
+  -webkit-animation-delay: 0s;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-name: "show";
   -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards; }
+  /* this prevents the animation from restarting! */
+  -moz-animation-delay: 0s;
+  -moz-animation-duration: 3s;
+  -moz-animation-name: "show";
+  -moz-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  -o-animation-delay: 0s;
+  -o-animation-duration: 3s;
+  -o-animation-name: "show";
+  -o-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  animation-delay: 0s;
+  animation-duration: 3s;
+  animation-name: "show";
+  animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */ }
 
 .draw-info__text--colored {
   color: #0070B7;

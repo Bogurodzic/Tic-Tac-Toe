@@ -31,13 +31,26 @@
     }
 }
 
-@mixin animation($str) {
-  -webkit-animation: #{$str};
-  -moz-animation: #{$str};
-  -ms-animation: #{$str};
-  -o-animation: #{$str};
-  animation: #{$str};
-  animation-fill-mode: forwards;
+@mixin animation ($delay, $duration, $animation) {
+    -webkit-animation-delay: $delay;
+    -webkit-animation-duration: $duration;
+    -webkit-animation-name: $animation;
+    -webkit-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+
+    -moz-animation-delay: $delay;
+    -moz-animation-duration: $duration;
+    -moz-animation-name: $animation;
+    -moz-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+
+    -o-animation-delay: $delay;
+    -o-animation-duration: $duration;
+    -o-animation-name: $animation;
+    -o-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+
+    animation-delay: $delay;
+    animation-duration: $duration;
+    animation-name: $animation;
+    animation-fill-mode: forwards; /* this prevents the animation from restarting! */
 }
 
 @include keyframes(show) {
@@ -48,13 +61,12 @@
 @include keyframes(slide) {
 
   0% {
-    left: 100%;
-    transform: translateX(-50%);
-    position: absolute;
+    transform: translateX(-100%);
+  }
+  80% {
+    transform: translateX(20%);
   }
   100% {
-    left: 0%;
-    transform: translateX(0);
-    position: static;
+    transform: translateX(0%);
   }
 }

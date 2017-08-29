@@ -9,5 +9,5 @@
   font-size: 20px;
   text-align: center;
 
-  @include animation('slide 3s 0');
+  @include animation(0s, 3s, "slide");
 }
