@@ -289,6 +289,16 @@ var logic = {
 
   clearSpot: function clearSpot(spot) {
     this.hasFigure(spot) ? spot.removeChild(spot.childNodes[0]) : false;
+  },
+
+  checkForNumber: function checkForNumber(num) {
+    return logic.getFiguresFromAllSpots().indexOf(num) > -1;
+  },
+
+  checkForDraw: function checkForDraw() {
+    if (!this.checkForNumber(0)) {
+      win.draw();
+    }
   }
 };
 
@@ -387,7 +397,7 @@ var computer = {
     ui.changeNextFigure();
     ui.changeTurnInformation();
     logic.check(this.getNextComputerFigureNumber());
-    this.checkForDraw();
+    logic.checkForDraw();
   },
 
   getNextComputerFigureNumber: function getNextComputerFigureNumber() {
@@ -475,16 +485,6 @@ var computer = {
       if (winnableSpots === 0) {
         placeFigureInFreeSpot([0, 1, 2, 3, 4, 5, 6, 7, 8]);
       }
-    }
-  },
-
-  checkForNumber: function checkForNumber(num) {
-    return logic.getFiguresFromAllSpots().indexOf(num) > -1;
-  },
-
-  checkForDraw: function checkForDraw() {
-    if (!this.checkForNumber(0)) {
-      win.draw();
     }
   },
 
@@ -636,6 +636,7 @@ function doTurn(place) {
     ui.changeNextFigure();
     ui.changeTurnInformation();
     checkWinCondition(ui.nextFigure);
+    logic.checkForDraw();
   }
 }
 

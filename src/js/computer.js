@@ -14,7 +14,7 @@ let computer = {
     ui.changeNextFigure();
     ui.changeTurnInformation();
     logic.check(this.getNextComputerFigureNumber());
-    this.checkForDraw();
+    logic.checkForDraw();
   },
 
   getNextComputerFigureNumber: () => ui.nextFigure === "circle" ? 2 : 1,
@@ -59,16 +59,6 @@ let computer = {
       }
     }
 
-  },
-
-  checkForNumber: function(num){
-    return logic.getFiguresFromAllSpots().indexOf(num) > -1
-  },
-
-  checkForDraw: function(){
-    if(!this.checkForNumber(0)){
-      win.draw();
-    }
   },
 
   placeFigure: function(index){

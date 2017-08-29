@@ -102,7 +102,17 @@ let logic = {
 
   clearSpot: function(spot){
     this.hasFigure(spot) ? spot.removeChild(spot.childNodes[0]) : false ;
-  }
+  },
+
+  checkForNumber: function(num){
+    return logic.getFiguresFromAllSpots().indexOf(num) > -1
+  },
+
+  checkForDraw: function(){
+    if(!this.checkForNumber(0)){
+      win.draw();
+    }
+  },
 }
 
 module.exports = logic;

@@ -29,6 +29,7 @@ function doTurn(place){
     ui.changeNextFigure();
     ui.changeTurnInformation();
     checkWinCondition(ui.nextFigure);
+    logic.checkForDraw();
   }
 }
 
