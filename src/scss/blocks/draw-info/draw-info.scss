@@ -1,5 +1,7 @@
 .draw-info {
-  display: none;
+  display: block;
+  opacity: 0;
+  height: 0;
   text-align: center;
   font-size: 26px;
 }

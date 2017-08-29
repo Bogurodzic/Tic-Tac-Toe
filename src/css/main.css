@@ -62,6 +62,20 @@ table {
       -ms-flex-align: center;
           align-items: center; }
 
+@-webkit-keyframes show {
+  0% {
+    opacity: 0;
+    height: 100%; }
+  100% {
+    opacity: 1; } }
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    height: 100%; }
+  100% {
+    opacity: 1; } }
+
 body {
   position: relative; }
 
@@ -194,12 +208,17 @@ body {
     cursor: pointer; }
 
 .draw-info {
-  display: none;
+  display: block;
+  opacity: 0;
+  height: 0;
   text-align: center;
   font-size: 26px; }
 
 .draw-info--visible {
-  display: block; }
+  -webkit-animation: show 3s 0;
+  animation: show 3s 0;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards; }
 
 .draw-info__text--colored {
   color: #0070B7;
