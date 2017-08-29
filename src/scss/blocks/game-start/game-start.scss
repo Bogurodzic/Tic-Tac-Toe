@@ -8,4 +8,6 @@
   margin-bottom: 40px;
   font-size: 20px;
   text-align: center;
+
+  @include animation('slide 3s 0');
 }
