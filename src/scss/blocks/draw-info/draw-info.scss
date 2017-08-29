@@ -1,0 +1,10 @@
+.draw-info {
+  //display: none;
+  text-align: center;
+  font-size: 26px;
+}
+
+
+@import "draw-info__text";
+@import "draw-info--visible";
+@import "draw-info__text--colored";

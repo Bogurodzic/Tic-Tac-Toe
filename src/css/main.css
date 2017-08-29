@@ -192,3 +192,11 @@ body {
   border: 1px dashed black; }
   .reset:hover {
     cursor: pointer; }
+
+.draw-info {
+  text-align: center;
+  font-size: 26px; }
+
+.draw-info__text--colored {
+  color: #0070B7;
+  font-weight: bold; }
