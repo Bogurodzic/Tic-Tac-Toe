@@ -111,6 +111,14 @@ var ui = {
 
   hideWinInfo: function hideWinInfo() {
     document.getElementById('win-info').classList.remove("win-info--visible");
+  },
+
+  showDrawInfo: function showDrawInfo() {
+    document.getElementById('draw-info').classList.add("draw-info--visible");
+  },
+
+  hideDrawInfo: function hideDrawInfo() {
+    document.getElementById('draw-info').classList.remove("draw-info--visible");
   }
 };
 
@@ -277,6 +285,7 @@ var logic = {
     ui.showTurnInformation();
     ui.hideWinInfo();
     ui.changeTurnInformation();
+    ui.hideDrawInfo();
   },
 
   clearBoard: function clearBoard() {
@@ -369,7 +378,7 @@ var win = {
 
   draw: function draw() {
     block.blockGame();
-    message.new("It is a draw!");
+    ui.showDrawInfo();
   }
 };
 

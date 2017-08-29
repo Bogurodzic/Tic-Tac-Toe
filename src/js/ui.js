@@ -39,6 +39,14 @@ let ui = {
 
   hideWinInfo: function(){
     document.getElementById('win-info').classList.remove("win-info--visible");
+  },
+
+  showDrawInfo: function(){
+    document.getElementById('draw-info').classList.add("draw-info--visible");
+  },
+
+  hideDrawInfo: function(){
+    document.getElementById('draw-info').classList.remove("draw-info--visible");
   }
 }
 

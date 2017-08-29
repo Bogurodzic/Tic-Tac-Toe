@@ -194,8 +194,12 @@ body {
     cursor: pointer; }
 
 .draw-info {
+  display: none;
   text-align: center;
   font-size: 26px; }
+
+.draw-info--visible {
+  display: block; }
 
 .draw-info__text--colored {
   color: #0070B7;

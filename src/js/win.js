@@ -18,7 +18,7 @@ let win = {
 
   draw: function(){
     block.blockGame();
-    message.new("It is a draw!");
+    ui.showDrawInfo();
   }
 }
 

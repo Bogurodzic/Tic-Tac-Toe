@@ -94,6 +94,7 @@ let logic = {
     ui.showTurnInformation();
     ui.hideWinInfo();
     ui.changeTurnInformation();
+    ui.hideDrawInfo();
   },
 
   clearBoard: function(){
