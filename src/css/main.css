@@ -76,6 +76,26 @@ table {
   100% {
     opacity: 1; } }
 
+@-webkit-keyframes showFigure {
+  0% {
+    opacity: 0;
+    height: 0px;
+    width: 0px; }
+  100% {
+    opacity: 1;
+    height: 60px;
+    width: 60px; } }
+
+@keyframes showFigure {
+  0% {
+    opacity: 0;
+    height: 0px;
+    width: 0px; }
+  100% {
+    opacity: 1;
+    height: 60px;
+    width: 60px; } }
+
 @-webkit-keyframes slide {
   0% {
     -webkit-transform: translateX(-100%);
@@ -176,16 +196,52 @@ body {
   /* this prevents the animation from restarting! */ }
 
 .circle {
-  width: 60px;
-  height: 60px;
   -webkit-border-radius: 50%;
           border-radius: 50%;
-  background: black; }
+  background: black;
+  -webkit-animation-delay: 0s;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-name: "showFigure";
+  -webkit-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  -moz-animation-delay: 0s;
+  -moz-animation-duration: 1s;
+  -moz-animation-name: "showFigure";
+  -moz-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  -o-animation-delay: 0s;
+  -o-animation-duration: 1s;
+  -o-animation-name: "showFigure";
+  -o-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  animation-delay: 0s;
+  animation-duration: 1s;
+  animation-name: "showFigure";
+  animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */ }
 
 .square {
-  width: 60px;
-  height: 60px;
-  background: black; }
+  background: black;
+  -webkit-animation-delay: 0s;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-name: "showFigure";
+  -webkit-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  -moz-animation-delay: 0s;
+  -moz-animation-duration: 1s;
+  -moz-animation-name: "showFigure";
+  -moz-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  -o-animation-delay: 0s;
+  -o-animation-duration: 1s;
+  -o-animation-name: "showFigure";
+  -o-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  animation-delay: 0s;
+  animation-duration: 1s;
+  animation-name: "showFigure";
+  animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */ }
 
 .modal {
   width: 400px;

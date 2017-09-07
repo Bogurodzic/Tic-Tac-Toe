@@ -1,5 +1,6 @@
 .square {
-  width: 60px;
-  height: 60px;
+
   background: black;
+
+  @include animation(0s, 1s, "showFigure");
 }
