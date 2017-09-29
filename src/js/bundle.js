@@ -410,69 +410,69 @@ var computer = {
   },
 
   getNextComputerFigureNumber: function getNextComputerFigureNumber() {
-    return ui.nextFigure === "circle" ? 2 : 1;
+    return ui.nextFigure === "circle" ? 1 : 2;
   },
 
   checkPossibilities: function checkPossibilities() {
     var allFiguresFromAllSpots = logic.getFiguresFromAllSpots();
     var that = this;
     var winnableSpots = 0;
+    var placedFigureInFreeSpot = false;
 
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+    lookForBestPlace(1);
 
-    try {
-      for (var _iterator = this.winPossibilities[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var winPossibilities = _step.value;
+    function lookForBestPlace(requiredFreeSpots) {
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
-        if (!logic.hasFigure(logic.getPlaceByIndex(4))) {
-          this.placeFigure(4);
-        } else if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])) {
-          placeFigureInFreeSpot(winPossibilities);
-          //If there is no winnableSpots place a figure at random place
-          winnableSpots++;
-          break;
+      try {
+        for (var _iterator = computer.winPossibilities[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var winPossibilities = _step.value;
+
+          if (!logic.hasFigure(logic.getPlaceByIndex(4))) {
+            computer.placeFigure(4);
+          } else if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])) {
+            if (freeSpotsForWin(winPossibilities) === requiredFreeSpots && !placedFigureInFreeSpot) {
+              placeFigureInFreeSpot(winPossibilities);
+              placedFigureInFreeSpot = true;
+              winnableSpots++;
+              break;
+            }
+          }
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
         }
       }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
+
+      if (requiredFreeSpots <= 3 && !placedFigureInFreeSpot) {
+        lookForBestPlace(requiredFreeSpots + 1);
       }
     }
-
     ifNoChanceToWin();
 
-    function checkSpot(index) {
-      if (allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === that.getNextComputerFigureNumber()) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    function placeFigureInFreeSpot(spots) {
+    function freeSpotsForWin(winPossibilities) {
+      var freeSpots = 3;
       var _iteratorNormalCompletion2 = true;
       var _didIteratorError2 = false;
       var _iteratorError2 = undefined;
 
       try {
-        for (var _iterator2 = spots[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          var spot = _step2.value;
+        for (var _iterator2 = winPossibilities[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var winPossibility = _step2.value;
 
-          if (allFiguresFromAllSpots[spot] === 0) {
-            that.placeFigure(spot);
-            break;
-          }
+          allFiguresFromAllSpots[winPossibility] === 0 ? false : freeSpots--;
         }
       } catch (err) {
         _didIteratorError2 = true;
@@ -485,6 +485,46 @@ var computer = {
         } finally {
           if (_didIteratorError2) {
             throw _iteratorError2;
+          }
+        }
+      }
+
+      return freeSpots;
+    }
+
+    function checkSpot(index) {
+      if (allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === that.getNextComputerFigureNumber()) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    function placeFigureInFreeSpot(spots) {
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
+
+      try {
+        for (var _iterator3 = spots[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var spot = _step3.value;
+
+          if (allFiguresFromAllSpots[spot] === 0) {
+            that.placeFigure(spot);
+            break;
+          }
+        }
+      } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3.return) {
+            _iterator3.return();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
           }
         }
       }

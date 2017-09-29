@@ -17,24 +17,44 @@ let computer = {
     logic.checkForDraw();
   },
 
-  getNextComputerFigureNumber: () => ui.nextFigure === "circle" ? 2 : 1,
+  getNextComputerFigureNumber: () => ui.nextFigure === "circle" ? 1 : 2,
 
   checkPossibilities: function(){
     let allFiguresFromAllSpots = logic.getFiguresFromAllSpots();
     let that = this;
     let winnableSpots = 0;
+    let placedFigureInFreeSpot = false
 
-    for (let winPossibilities of this.winPossibilities) {
-      if (!logic.hasFigure(logic.getPlaceByIndex(4))) {
-        this.placeFigure(4);
-      } else if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])){
-        placeFigureInFreeSpot(winPossibilities);
-        //If there is no winnableSpots place a figure at random place
-        winnableSpots++;
-        break ;
+
+    lookForBestPlace(1);
+
+    function lookForBestPlace(requiredFreeSpots){
+      for (let winPossibilities of computer.winPossibilities) {
+        if (!logic.hasFigure(logic.getPlaceByIndex(4))) {
+          computer.placeFigure(4);
+        } else if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])){
+          if(freeSpotsForWin(winPossibilities)===requiredFreeSpots && !placedFigureInFreeSpot){
+            placeFigureInFreeSpot(winPossibilities);
+            placedFigureInFreeSpot=true;
+            winnableSpots++;
+            break ;
+          }
+        }
+      }
+
+      if(requiredFreeSpots<=3 && !placedFigureInFreeSpot ){
+        lookForBestPlace(requiredFreeSpots+1);
       }
     }
     ifNoChanceToWin();
+
+    function freeSpotsForWin(winPossibilities){
+      let freeSpots = 3;
+      for(let winPossibility of winPossibilities){
+        allFiguresFromAllSpots[winPossibility] === 0 ? false : freeSpots--;
+      }
+      return freeSpots;
+    }
 
     function checkSpot(index){
       if(allFiguresFromAllSpots[index] === 0 || allFiguresFromAllSpots[index] === that.getNextComputerFigureNumber()){
