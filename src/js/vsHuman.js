@@ -41,6 +41,7 @@ let vsHuman = {
   start: function(){
     addEvents();
     ui.changeTurnInformation();
+    ui.showPointsInfo();
   }
 }
 

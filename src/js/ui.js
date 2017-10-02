@@ -3,15 +3,37 @@ let ui = {
   turnInformation: document.getElementsByClassName("information__turn")[0],
   computerFigure: "square",
   playerFigure: "circle",
+  actualTurn: "player1",
   player1Points: 0,
   player2Points: 0,
 
-  getPlyer1Points: function(){
+  changeActualTurn: function(){
+    this.actualTurn === "player1" ? this.actualTurn = "player2" : this.actualTurn = "player1";
+  },
+
+  addPointForWinner: function(){
+    this.actualTurn === "player1" ? this.player1Points++ : this.player2Points++;
+  },
+
+  getPlayer1Points: function(){
     return this.player1Points;
   },
 
-  getPlyer2Points: function(){
+  getPlayer2Points: function(){
     return this.player2Points;
+  },
+
+  changePointsInfo: function(){
+    document.getElementById('points-player1').innerText = "Player1 :" + this.getPlayer1Points();
+    document.getElementById('points-player2').innerText = "Player2 :" + this.getPlayer2Points();
+  },
+
+  showPointsInfo: function(){
+    document.getElementById('points-info').classList.add("points-info--visible");
+  },
+
+  hidePointsInfo: function(){
+    document.getElementById('points-info').classList.remove("points-info--visible");
   },
 
   getPlayerFigure: function(){

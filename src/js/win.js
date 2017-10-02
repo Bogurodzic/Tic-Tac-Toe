@@ -9,6 +9,8 @@ let win = {
     ui.showWinInfo();
     ui.hideTurnInformation();
     ui.changeNextFigure();
+    ui.addPointForWinner();
+    ui.changePointsInfo();
     block.blockGame();
   },
 

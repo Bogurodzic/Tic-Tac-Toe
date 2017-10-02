@@ -10,11 +10,14 @@ let computer = {
   computerFigure : ui.getComputerFigure(),
 
   doTurn: function(){
+    ui.changeActualTurn();
     this.checkPossibilities();
     ui.changeNextFigure();
     ui.changeTurnInformation();
+    //ui.computerFigure = this.getNextComputerFigureNumber();
     logic.check(this.getNextComputerFigureNumber());
     logic.checkForDraw();
+    ui.changeActualTurn();
   },
 
   getNextComputerFigureNumber: () => ui.nextFigure === "circle" ? 1 : 2,

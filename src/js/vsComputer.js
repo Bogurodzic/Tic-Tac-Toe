@@ -43,6 +43,7 @@ let checkWinCondition = (nextFigure) => nextFigure === "circle" ? logic.check(2)
 
 let vsComputer = {
   start: function(){
+    ui.showPointsInfo();
     computer.doTurn();
     addEvents();
     ui.changeTurnInformation();

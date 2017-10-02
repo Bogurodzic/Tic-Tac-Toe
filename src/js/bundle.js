@@ -75,6 +75,38 @@ var ui = {
   turnInformation: document.getElementsByClassName("information__turn")[0],
   computerFigure: "square",
   playerFigure: "circle",
+  actualTurn: "player1",
+  player1Points: 0,
+  player2Points: 0,
+
+  changeActualTurn: function changeActualTurn() {
+    this.actualTurn === "player1" ? this.actualTurn = "player2" : this.actualTurn = "player1";
+  },
+
+  addPointForWinner: function addPointForWinner() {
+    this.actualTurn === "player1" ? this.player1Points++ : this.player2Points++;
+  },
+
+  getPlayer1Points: function getPlayer1Points() {
+    return this.player1Points;
+  },
+
+  getPlayer2Points: function getPlayer2Points() {
+    return this.player2Points;
+  },
+
+  changePointsInfo: function changePointsInfo() {
+    document.getElementById('points-player1').innerText = "Player1 :" + this.getPlayer1Points();
+    document.getElementById('points-player2').innerText = "Player2 :" + this.getPlayer2Points();
+  },
+
+  showPointsInfo: function showPointsInfo() {
+    document.getElementById('points-info').classList.add("points-info--visible");
+  },
+
+  hidePointsInfo: function hidePointsInfo() {
+    document.getElementById('points-info').classList.remove("points-info--visible");
+  },
 
   getPlayerFigure: function getPlayerFigure() {
     return this.playerFigure;
@@ -371,6 +403,8 @@ var win = {
     ui.showWinInfo();
     ui.hideTurnInformation();
     ui.changeNextFigure();
+    ui.addPointForWinner();
+    ui.changePointsInfo();
     block.blockGame();
   },
 
@@ -404,11 +438,14 @@ var computer = {
   computerFigure: ui.getComputerFigure(),
 
   doTurn: function doTurn() {
+    ui.changeActualTurn();
     this.checkPossibilities();
     ui.changeNextFigure();
     ui.changeTurnInformation();
+    //ui.computerFigure = this.getNextComputerFigureNumber();
     logic.check(this.getNextComputerFigureNumber());
     logic.checkForDraw();
+    ui.changeActualTurn();
   },
 
   getNextComputerFigureNumber: function getNextComputerFigureNumber() {
@@ -637,6 +674,7 @@ var checkWinCondition = function checkWinCondition(nextFigure) {
 
 var vsComputer = {
   start: function start() {
+    ui.showPointsInfo();
     computer.doTurn();
     addEvents();
     ui.changeTurnInformation();
@@ -701,6 +739,7 @@ var vsHuman = {
   start: function start() {
     addEvents();
     ui.changeTurnInformation();
+    ui.showPointsInfo();
   }
 };
 
