@@ -1,0 +1,13 @@
+.points-info {
+  display: block;
+  opacity: 0;
+  height: 0;
+  text-align: center;
+  font-size: 26px;
+}
+
+
+@import "points-info--visible";
+@import "points-info__text";
+@import "points-info__text--player1";
+@import "points-info__text--player2";

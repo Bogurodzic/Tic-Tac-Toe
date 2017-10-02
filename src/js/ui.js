@@ -3,6 +3,16 @@ let ui = {
   turnInformation: document.getElementsByClassName("information__turn")[0],
   computerFigure: "square",
   playerFigure: "circle",
+  player1Points: 0,
+  player2Points: 0,
+
+  getPlyer1Points: function(){
+    return this.player1Points;
+  },
+
+  getPlyer2Points: function(){
+    return this.player2Points;
+  },
 
   getPlayerFigure: function(){
     return this.playerFigure;

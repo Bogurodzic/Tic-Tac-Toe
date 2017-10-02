@@ -1,0 +1,3 @@
+.points-info--visible {
+  @include animation(0s, 3s, "show");
+}

@@ -399,3 +399,32 @@ body {
 .draw-info__text--colored {
   color: #0070B7;
   font-weight: bold; }
+
+.points-info {
+  display: block;
+  opacity: 0;
+  height: 0;
+  text-align: center;
+  font-size: 26px; }
+
+.points-info--visible {
+  -webkit-animation-delay: 0s;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-name: "show";
+  -webkit-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  -moz-animation-delay: 0s;
+  -moz-animation-duration: 3s;
+  -moz-animation-name: "show";
+  -moz-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  -o-animation-delay: 0s;
+  -o-animation-duration: 3s;
+  -o-animation-name: "show";
+  -o-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  animation-delay: 0s;
+  animation-duration: 3s;
+  animation-name: "show";
+  animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */ }
