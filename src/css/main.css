@@ -405,7 +405,8 @@ body {
   opacity: 0;
   height: 0;
   text-align: center;
-  font-size: 26px; }
+  font-size: 18px;
+  margin-top: 25px; }
 
 .points-info--visible {
   -webkit-animation-delay: 0s;
@@ -428,3 +429,9 @@ body {
   animation-name: "show";
   animation-fill-mode: forwards;
   /* this prevents the animation from restarting! */ }
+
+.points-info__text--orange {
+  color: #FF7F50; }
+
+.points-info__text--green {
+  color: #008000; }

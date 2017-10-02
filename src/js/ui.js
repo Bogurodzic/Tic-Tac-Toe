@@ -28,8 +28,8 @@ let ui = {
   },
 
   changePointsInfo: function(){
-    document.getElementById('points-player1').innerText = "Player1 :" + this.getPlayer1Points();
-    document.getElementById('points-player2').innerText = "Player2 :" + this.getPlayer2Points();
+    document.getElementById('points-player1').innerText = this.getPlayer1Points();
+    document.getElementById('points-player2').innerText = this.getPlayer2Points();
   },
 
   showPointsInfo: function(){
