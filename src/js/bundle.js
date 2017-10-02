@@ -224,6 +224,8 @@ var logic = {
   },
 
   getFiguresFromAllSpots: function getFiguresFromAllSpots() {
+    this.clearAllSpots();
+    this.checkAllSpots();
     return this.allSpots;
   },
 
@@ -432,6 +434,8 @@ var computer = {
 
           if (!logic.hasFigure(logic.getPlaceByIndex(4))) {
             computer.placeFigure(4);
+            placedFigureInFreeSpot = true;
+            winnableSpots++;
           } else if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])) {
             if (freeSpotsForWin(winPossibilities) === requiredFreeSpots && !placedFigureInFreeSpot) {
               placeFigureInFreeSpot(winPossibilities);

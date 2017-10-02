@@ -33,6 +33,8 @@ let logic = {
   },
 
   getFiguresFromAllSpots: function(){
+    this.clearAllSpots();
+    this.checkAllSpots();
     return this.allSpots;
   },
 

@@ -32,6 +32,8 @@ let computer = {
       for (let winPossibilities of computer.winPossibilities) {
         if (!logic.hasFigure(logic.getPlaceByIndex(4))) {
           computer.placeFigure(4);
+          placedFigureInFreeSpot=true;
+          winnableSpots++;
         } else if (checkSpot(winPossibilities[0]) && checkSpot(winPossibilities[1]) && checkSpot(winPossibilities[2])){
           if(freeSpotsForWin(winPossibilities)===requiredFreeSpots && !placedFigureInFreeSpot){
             placeFigureInFreeSpot(winPossibilities);
