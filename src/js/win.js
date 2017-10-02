@@ -11,6 +11,7 @@ let win = {
     ui.changeNextFigure();
     ui.addPointForWinner();
     ui.changePointsInfo();
+    ui.resetActualTurn();
     block.blockGame();
   },
 

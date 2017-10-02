@@ -28,6 +28,7 @@ function doTurn(place){
     draw.drawNewFigure(place);
     ui.changeNextFigure();
     ui.changeTurnInformation();
+    ui.changeActualTurn();
     checkWinCondition(ui.nextFigure);
     logic.checkForDraw();
   }

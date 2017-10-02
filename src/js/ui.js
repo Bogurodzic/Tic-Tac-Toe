@@ -11,6 +11,10 @@ let ui = {
     this.actualTurn === "player1" ? this.actualTurn = "player2" : this.actualTurn = "player1";
   },
 
+  resetActualTurn: function(){
+    this.actualTurn = "player1";
+  },
+
   addPointForWinner: function(){
     this.actualTurn === "player1" ? this.player1Points++ : this.player2Points++;
   },

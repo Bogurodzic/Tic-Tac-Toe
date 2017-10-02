@@ -83,6 +83,10 @@ var ui = {
     this.actualTurn === "player1" ? this.actualTurn = "player2" : this.actualTurn = "player1";
   },
 
+  resetActualTurn: function resetActualTurn() {
+    this.actualTurn = "player1";
+  },
+
   addPointForWinner: function addPointForWinner() {
     this.actualTurn === "player1" ? this.player1Points++ : this.player2Points++;
   },
@@ -405,6 +409,7 @@ var win = {
     ui.changeNextFigure();
     ui.addPointForWinner();
     ui.changePointsInfo();
+    ui.resetActualTurn();
     block.blockGame();
   },
 
@@ -726,6 +731,7 @@ function doTurn(place) {
     draw.drawNewFigure(place);
     ui.changeNextFigure();
     ui.changeTurnInformation();
+    ui.changeActualTurn();
     checkWinCondition(ui.nextFigure);
     logic.checkForDraw();
   }
