@@ -622,8 +622,8 @@ function doTurn(place) {
     draw.drawNewFigure(place);
     ui.changeNextFigure();
     ui.changeTurnInformation();
-    checkWinCondition(ui.nextFigure);
     computer.doTurn();
+    checkWinCondition(ui.nextFigure);
   }
 }
 
