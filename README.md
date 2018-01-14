@@ -3,7 +3,7 @@
 This is one of freecodecamp project.
 In the future I'll do the React version of the Tic-Tac-Toe for comparision vanila js and React. (;
 
-Live version: [[link]](http://kamiljarzab.pl/Projekty/tic-tac-toe/)
+Live version: [[link]](http://kamil.webheroes.io/Projekty/tictactoe/)
 
 
 ## Site functionality
